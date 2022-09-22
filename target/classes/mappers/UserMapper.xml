@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.delivery.salad.user.mapper.IUserMapper">
+	<!-- namespace는 어떤 interface를 참조하는지 지정  -->
+	
+	<!-- 
+	
+	USERCREATE TABLE `USER` (
+	`USERID`	VARCHAR(50)	NOT NULL,
+	`USERNAME`	VARCHAR(50)	NOT NULL,
+	`USERPW`	VARCHAR(100)	NOT NULL,
+	`USERPHONE`	VARCHAR(50)	NOT NULL,
+	`USEREMAIL`	VARCHAR(50)	NOT NULL,
+	`USERBASICADDR`	VARCHAR(300)	NOT NULL,
+	`USERDETAILADDR`	VARCHAR(300)	NOT NULL
+	);
+	
+	ALTER TABLE `USER` ADD CONSTRAINT `PK_USER` PRIMARY KEY (
+		`USERID`
+	)
+	
+	 -->
+	
+	
+	
+	
+	  <resultMap type="com.delivery.salad.command.UserVO" id="UserMap">
+	  	<id property = "userId" column="USERID"/>
+	  	
+	  	<result property="userName" column="USERNAME"/>
+	  	<result property="userPw" column="USERPW"/>
+	  	<result property="userPhone" column="USERPHONE"/>
+	  	<result property="userEmail" column="USEREMAIL"/>
+	  	<result property="userBasicAddr" column="USERBASICADDR"/>
+	  	<result property="userDetailAddr" column="USERDETAILADDR"/>
+
+	  </resultMap> 
+	 
+	<select id="idCheck" resultType="int" >
+		SELECT COUNT(*) FROM USERBASIC
+		WHERE
+		JOINID = #{JOINID}
+	</select>
+	
+	
+	<insert id="join">
+		INSERT INTO USER (USERID, USERPW, USERPHONE, USEREMAIL, USERBASICADDR, USERDETAILADDR) 
+		VALUES(#{userId}, #{userName}, #{userPw}, #{userPhone}, #{userEmail}, #{userBasicAddr} ,#{userDetailAddr} )
+	</insert>
+	
+	
+	<!-- <select id ="login" resultMap="UserMap">
+		SELECT *
+		FROM USERBASIC B, USERDETAIL D
+		WHERE B.JOINSOCNUM = D.JOINSOCNUM
+		AND B.JOINID = #{JOINID}
+		AND D.JOINPW = #{JOINPW}
+	</select>
+	
+	<select id="idSearch" resultMap="UserMap">
+		SELECT * FROM USERBASIC B, USERDETAIL D
+		WHERE
+		B.JOINSOCNUM = #{JOINSOCNUM}
+		AND D.JOINNAME = #{JOINNAME}
+	</select>
+	
+	<select id="pwSearch" resultMap="UserMap">
+		SELECT *
+		FROM USERBASIC B, USERDETAIL D
+		WHERE B.JOINSOCNUM = D.JOINSOCNUM
+		AND D.JOINNAME = #{JOINNAME}
+		AND D.JOINSOCNUM = #{JOINSOCNUM}
+	</select>
+	
+	<update id="newPwRegist">
+		update USERDETAIL
+		SET JOINPW = #{JOINPW}
+		where JOINNAME = #{JOINNAME} 
+		and JOINSOCNUM = #{JOINSOCNUM} 
+	</update>
+	
+	
+	
+	<select id="getInfo" resultMap="UserMap">
+		SELECT
+			B.JOINID,
+			D.JOINNAME,
+			D.JOINSOCNUM,
+			D.JOINGEN,
+			D.JOINEMAIL,
+			D.JOINPHONE,
+			D.JOINADDRNUM,
+			D.JOINADDRBASIC,
+			D.JOINADDRDETAIL,
+			D.INSNAME,
+			D.INSSOCNUM,
+			D.INSADDRNUM,
+			D.INSADDRBASIC,
+			D.INSADDRDETAIL
+		FROM USERDETAIL D LEFT OUTER JOIN USERBASIC B
+		ON D.JOINSOCNUM = B.JOINSOCNUM
+		WHERE B.JOINID = #{JOINID}
+	</select>
+	
+	<update id="updateUser">
+		UPDATE USERDETAIL D
+		SET D.JOINADDRNUM = #{JOINADDRNUM},
+			D.JOINADDRBASIC = #{JOINADDRBASIC},
+           	D.JOINADDRDETAIL = #{JOINADDRDETAIL},
+           	D.INSNAME = #{INSNAME},
+           	D.INSSOCNUM = #{INSSOCNUM},
+           	D.INSADDRNUM = #{INSADDRNUM},
+			D.INSADDRBASIC = #{INSADDRBASIC},
+           	D.INSADDRDETAIL = #{INSADDRDETAIL}
+		WHERE D.JOINSOCNUM = (
+	        SELECT JOINSOCNUM 
+	        FROM USERBASIC B
+	        WHERE JOINID = #{JOINID})
+	</update>
+	
+	
+	
+	<delete id="deleteUser1">
+		delete from USERBASIC B
+		where exists
+		(select 1 from USERDETAIL D
+		where B.JOINSOCNUM = D.JOINSOCNUM
+		and d.JOINPW = #{JOINPW})
+		
+	</delete>
+	
+	<delete id="deleteUser2">
+	
+		
+		delete from USERDETAIL 
+		where JOINPW = #{JOINPW}
+		and JOINNAME = #{JOINNAME}
+	</delete> -->
+</mapper>
