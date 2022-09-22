@@ -7,7 +7,7 @@
 	<name>delivery_salad</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
-	<!-- 자바버전, 스프링 버전 변경 -->
+
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>5.3.18</org.springframework-version>

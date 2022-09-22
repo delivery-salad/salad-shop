@@ -8,10 +8,7 @@
   	
   	
   	<settings>
-
-  		<!-- <setting name="jdbcTypeForNull" value="VARCHAR"/> :VARCHAR면 빈 문자열로 들어감    여러 타입이 존재한다 . -->
-  			<setting name="jdbcTypeForNull" value="NULL"/> <!-- NULL이면 NULL이라고 작성된다. -->
-  			
+  			<setting name="jdbcTypeForNull" value="NULL"/> 
   			<setting name="defaultStatementTimeout" value="3000"/> 
   	</settings>
   
