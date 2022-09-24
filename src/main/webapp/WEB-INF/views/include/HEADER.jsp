@@ -78,7 +78,7 @@
 								</ul>
 							</div>
 							<div class="header__top__right__auth">
-								<a href="#"><i class="fa fa-user"></i> Login</a>
+								<a href="<c:url value='/user/moveLogin'/>"><i class="fa fa-user"></i> Login</a>
 							</div>
 
 							<div class="header__cart">
