@@ -8,15 +8,11 @@
   <style>
     body {
       min-height: 100vh;
-
     }
-
     .input-form {
       max-width: 680px;
-
       margin-top: 80px;
       padding: 32px;
-
       background: #fff;
       -webkit-border-radius: 10px;
       -moz-border-radius: 10px;
@@ -25,24 +21,19 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
-
     .regist-cancel-btn{
       text-align: center;
     }
-
     .regist-btn{
       margin-right: 100px;
     }
-
     .cont{
       margin-top: 50px;
       margin-bottom: 50px;
     }
-
     .text-bar{
         text-align: center;
     }
-
     /* .total-bar{
         background-color: #f5f5f5;
     } */
@@ -327,14 +318,12 @@
      */
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
-
       Array.prototype.filter.call(forms, (form) => {
         form.addEventListener('submit', function (event) {
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
           }
-
           form.classList.add('was-validated');
         }, false);
       });
@@ -360,7 +349,6 @@
 		});
 		
 	})
-
 window.onload = function(){
     document.getElementById("basic-address").addEventListener("click", function(){ //주소입력칸을 클릭하면
         //카카오 지도 발생
