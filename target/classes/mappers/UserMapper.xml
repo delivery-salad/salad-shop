@@ -40,16 +40,24 @@
 	  </resultMap> 
 	 
 	<select id="idCheck" resultType="int" >
-		SELECT COUNT(*) FROM USERBASIC
+		SELECT COUNT(*) FROM USER
+		
 		WHERE
-		JOINID = #{JOINID}
+		USERID = #{userId}
 	</select>
 	
 	
 	<insert id="join">
-		INSERT INTO USER (USERID, USERPW, USERPHONE, USEREMAIL, USERBASICADDR, USERDETAILADDR) 
+		INSERT INTO USER (USERID, USERNAME, USERPW, USERPHONE, USEREMAIL, USERBASICADDR, USERDETAILADDR) 
 		VALUES(#{userId}, #{userName}, #{userPw}, #{userPhone}, #{userEmail}, #{userBasicAddr} ,#{userDetailAddr} )
 	</insert>
+	
+	
+	<select id ="login" resultMap = "UserMap">
+		SELECT * FROM USER 
+		WHERE USERID = #{userId} and USERPW = #{userPw} 
+	
+	</select>
 	
 	
 	<!-- <select id ="login" resultMap="UserMap">

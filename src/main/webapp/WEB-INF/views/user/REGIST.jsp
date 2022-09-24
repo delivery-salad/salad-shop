@@ -8,11 +8,15 @@
   <style>
     body {
       min-height: 100vh;
+
     }
+
     .input-form {
       max-width: 680px;
+
       margin-top: 80px;
       padding: 32px;
+
       background: #fff;
       -webkit-border-radius: 10px;
       -moz-border-radius: 10px;
@@ -21,19 +25,24 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+
     .regist-cancel-btn{
       text-align: center;
     }
+
     .regist-btn{
       margin-right: 100px;
     }
+
     .cont{
       margin-top: 50px;
       margin-bottom: 50px;
     }
+
     .text-bar{
         text-align: center;
     }
+
     /* .total-bar{
         background-color: #f5f5f5;
     } */
@@ -57,6 +66,7 @@
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
               <input type="text" class="form-control" id="name" name="userName" placeholder="" value="" required>
+              
               <div class="invalid-feedback">
                 이름을 입력해주세요.
               </div>
@@ -64,6 +74,8 @@
             <div class="col-md-6 mb-3">
               <label for="nickname">아이디</label>
               <input type="text" class="form-control" id="id" name = "userId" placeholder="" value="" required>
+              <button type="button" class="input-group-text btn-add-style btn-outline-secondary double-check-btn" id="double-check-btn">중복확인</button>
+              
               <div class="invalid-feedback">
                 아이디
               </div>
@@ -73,35 +85,54 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="name">비밀번호</label>
-              <input type="text" class="form-control" id="password" name="userPw" placeholder="" value="" required>
+              <input type="password" class="form-control" id="password" name="userPw" placeholder="" value="" required>
               <div class="invalid-feedback">
                 비밀번호를 입력해주세요.
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <label for="nickname">비밀번호 확인</label>
-              <input type="text" class="form-control" id="check-password" placeholder="" value="" required>
+              <input type="password" class="form-control" id="check-password" placeholder="" value="" required>
               <div class="invalid-feedback">
                 비밀번호를 확인해주세요.
               </div>
             </div>
           </div>
 
-          <div class="mb-3">
-            <label for="email">핸드폰 번호</label>
-            <input type="email" class="form-control" id="phone-num" name="userPhone" placeholder="- 제외하고 작성해주세요" required>
-            <div class="invalid-feedback">
-              핸드폰 번호를 입력해주세요.
+          <div class="row">
+            <div class="col-md-6 mb-3">
+          
+	            <label for="email">핸드폰 번호</label>
+	            <input type="email" class="form-control" id="phone-num" name="userPhone" placeholder="- 제외하고 작성해주세요" required>
+	            <button type="button" class="input-group-text btn-add-style btn-outline-secondary double-check-btn" id="phone-check-btn">인증</button>
+            
+            
+            </div>
+            
+            <div class="col-md-6 mb-3">
+            
+	            <label for="email">이메일</label>
+	            <input type="email" class="form-control" id="email" name="userEmail" placeholder="you@example.com" required>
+	            
+	            <input type="text" class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요." maxlength="6" disabled="disabled">
+	            
+	            <button type="button" class="input-group-text btn-add-style btn-outline-secondary double-check-btn" id="email-check-btn">인증</button>
+            
             </div>
           </div>
 
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="email">이메일</label>
             <input type="email" class="form-control" id="email" name="userEmail" placeholder="you@example.com" required>
+            
+            <input type="text" class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요." maxlength="6" disabled="disabled">
+            
+            <button type="button" class="input-group-text btn-add-style btn-outline-secondary double-check-btn" id="email-check-btn">인증</button>
+            
             <div class="invalid-feedback">
               이메일을 입력해주세요.
             </div>
-          </div>
+          </div> -->
 
           <div class="mb-3">
             <label for="address">주소</label>
@@ -308,27 +339,8 @@
   </div>
 </section>
 
-
   
- <!--  <script>
-    /**
-    유효성 검사를 진행할 지 그냥 사용할지 생각해보기 
-    
-    
-     */
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  </script> -->
+ 
   
 
   
@@ -337,29 +349,207 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(function(){
-		$('#joinBtn').click(function(){
-			console.log('회원가입 요청');
 		
-			if (confirm("회원가입 하시겠습니까?")){
-				$('#joinForm').submit();
+		//아이디 중복 체크 
+		$('#double-check-btn').click(function() {
+			
+			const JOINID = $('#id').val();
+			
+			if(JOINID === ''){
+				alert('아이디는 필수값입니다.');
+				return;
+				
+			} 
+			
+			$.ajax({
+				type: 'post',
+				url: '<c:url value="/user/idCheck" />',
+				data: JOINID,
+				contentType: 'application/json',
+				success: function(data) {
+					if(data === 'ok') {
+						alert('중복확인 완료되었습니다. 회원가입을 진행해주세요.');
+						$('#id').attr('readonly', true);
+
+					} else if(data === 'no') {
+						alert('중복된 아이디입니다.다시 입력해주세요.');
+					}
+				},
+				error: function() {
+					console.log(data);
+					alert('서버 에러입니다. 관리자에게 문의하세요.');
+				}
+			}); //중복확인 비동기 통신 끝.
+			
+		}); //아이디 중복 체크 끝.
+		
+		//인증번호 이메일 전송
+		$('#email-check-btn').click(function() {
+			console.log('이메일 인증번호 버튼 클릭됨 ');
+			const joinEmail = $('#email').val()
+			console.log('완성된 이메일: ' + joinEmail);
+			
+			$.ajax({
+				type: 'GET',
+				url: '<c:url value="/user/mailCheck?joinEmail=" />' + joinEmail,
+				success: function(data) {
+					console.log('컨트롤러가 전달한 인증번호: ' + data);
+					$('.mail-check-input').attr('disabled', false); //비활성된 인증번호 입력창 활성화.
+					code = data;
+					alert('인증번호가 전송되었습니다. 확인 후 입력란에 정확하게 입력하세요!');
+				},
+				error: function() {
+					console.log(data);
+					alert('이메일 서버 에러입니다. 관리자에게 문의하세요.');
+				}
+			}); //end ajax(이메일 전송)
+			
+		}); //이메일 전송 끝.
+		
+		//인증번호 비교
+		//blur -> focus가 벗어나는 경우 발생
+		$('.mail-check-input').blur(function() {
+				const inputCode = $(this).val();
+				
+				if(inputCode === code) {
+					alert('인증 완료되었습니다.')
+
+					$('#email-check-btn').attr('disabled', true); //이메일 인증 못하게 버튼 비활성.
+					$('#email').attr('readonly', true);
+
+					$(this).attr('readonly', true);
+					
+
+				} else {
+					alert('인증 실패입니다. 다시 한번 확인해주세요');
+					
+				}
+				
+			}); //인증번호 이벤트 끝..
+		
+			
+		
+/* 		var code2 = "";
+		$('#phone-check-btn').click(function(){
+			alert('인증번호가 발송이 완료되었습니다. \n 휴대폰에서 인증번호를 확인해주세요. ');
+			var phone = $('#phone-num').val(); 
+			$.ajax({
+				type:"GET", 
+				url:'<c:url value="/user/phonenum?phone="/>'+phone, 
+				success:function(data){
+					if(data == "error"){
+						alert("휴대폰 번호가 올바르지 않습니다.")
+						$('#phone-num').attr("autofocus", true);
+						
+						// jquery 검사해보기 
+					}else{
+						$('#joinPhone2').attr("disabled", false);
+						$('#joinPhone').attr("readonly", true);
+						code2 = data;
+					}
+				}
+				
+			});
+			
+		});
+		
+		$("#phoneNumAuth").click(function(){
+			if ($("#joinPhone2").val() == code2){
+				alert('인증번호가 일치합니다. '); 
+				$('#joinPhone2').attr("disabled", true); 
 			}
 			else{
-				return
+				alert('인증번호가 일치하지 않습니다. \n 다시 확인해주세요 ');
+
 			}
+		}); */
+		
+		
+		
+		
+		$('#joinBtn').click(function(){
+			console.log('회원가입 요청');
+			
+			if(!$('#id').attr('readonly')) {
+				alert('아이디 중복체크는 필수입니다.');
+				return;
+			} else if($('#password').val() === '' || $('#password').val() !== $('#check-password').val()) {
+				alert('비밀번호 규칙을 확인하세요.');
+				$('#password').focus();
+				return;
+			} else if($('#name').val() === '') {
+				alert('이름은 필수입니다.');
+				$('#name').focus();
+				return;
+			} else {
+				console.log('회원가입요청')
+				$('#joinForm').submit();
+			}
+		
+			
 		});
 		
 	})
-window.onload = function(){
-    document.getElementById("basic-address").addEventListener("click", function(){ //주소입력칸을 클릭하면
-        //카카오 지도 발생
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("basic-address").value = data.address; // 주소 넣기
-                document.querySelector("input[id=detail-address]").focus(); //상세입력 포커싱
-            }
-        }).open();
-    });
-}
+
+	window.onload = function(){
+	    document.getElementById("basic-address").addEventListener("click", function(){ //주소입력칸을 클릭하면
+	        //카카오 지도 발생
+	        new daum.Postcode({
+	            oncomplete: function(data) { //선택시 입력값 세팅
+	                document.getElementById("basic-address").value = data.address; // 주소 넣기
+	                document.querySelector("input[id=detail-address]").focus(); //상세입력 포커싱
+	            }
+	        }).open();
+	    });
+	}
+	/* 이거 정한 형식대로 바꾸기 */
+	
+	/*아이디 형식 검사 스크립트*/
+    var id = document.getElementById("id");
+    id.onkeyup = function() {
+        /*자바스크립트의 정규표현식 입니다*/
+        /*test메서드를 통해 비교하며, 매칭되면 true, 아니면 false반*/
+        var regex = /^[A-Za-z0-9+]{4,12}$/; 
+        if(regex.test(document.getElementById("id").value )) {
+            document.getElementById("id").style.borderColor = "green";
+            /* document.getElementById("msgId").innerHTML = "아이디 중복체크는 필수 입니다"; */
+
+        } else {
+            document.getElementById("id").style.borderColor = "red";
+            /* document.getElementById("msgId").innerHTML = ""; */
+        }
+    }
+	
+    
+    /*비밀번호 형식 검사 스크립트*/
+    var pw = document.getElementById("password");
+    pw.onkeyup = function(){
+        var regex = /^[A-Za-z0-9+]{8,16}$/;
+         if(regex.test(document.getElementById("password").value )) {
+            document.getElementById("password").style.borderColor = "green";
+            /* document.getElementById("msgPw").innerHTML = "사용가능합니다";
+            document.getElementById("msgPw").style.color = "green"; */
+        } else {
+            document.getElementById("password").style.borderColor = "red";
+            document.getElementById("password").innerHTML = "";
+        }
+    }
+    /*비밀번호 확인검사*/
+    var joinPwCheck = document.getElementById("check-password");
+    joinPwCheck.onkeyup = function() {
+        var regex = /^[A-Za-z0-9+]{8,16}$/;
+        if(document.getElementById("check-password").value == document.getElementById("password").value ) {
+            document.getElementById("check-password").style.borderColor = "green";
+            /* document.getElementById("msgPw-c").innerHTML = "비밀번호가 일치합니다";
+            document.getElementById("msgPw-c").style.color = "green"; */
+        } else {
+            document.getElementById("check-password").style.borderColor = "red";
+            /* document.getElementById("msgPw-c").innerHTML = "비밀번호 확인란을 확인하세요"; */
+        }
+    }        
+
+	
+	
 </script>
 
 <%@ include file="../include/FOOTER.jsp"%>

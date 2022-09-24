@@ -7,9 +7,7 @@
 
 
 
-<%@ include file="../include/HEADER.jsp"%>
-
-  <style>
+<style>
     body {
       min-height: 100vh;
 
@@ -75,13 +73,16 @@
   </style>
   
 
+	<jsp:include page="../include/HEADER.jsp" />
+  
 
-    <section class="login-form">
+
+ <section class="login-form">
         <div class="content">
             <div class="container">
               <div class="row">
                 <div class="col-md-6 order-md-2">
-                  <img src="/img/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
+                  <img src="${pageContext.request.contextPath }/resources/img/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
                 </div>
                 <div class="col-md-6 contents">
                   <div class="row justify-content-center">
@@ -89,15 +90,16 @@
                       <div class="mb-4">
                       <h3>Sign In to <strong>SALAD DELIVERY</strong></h3>
                     </div>
-                    <form action="#" method="post">
+                    <form action="<c:url value='/user/login'/>" method="post" id="loginForm">
+                    
                       <div class="form-group first">
                         <label>아이디</label>
-                        <input type="text" class="form-control" id="userId">
-        
+                        <input type="text" class="form-control" id="userId" name="userId">
                       </div>
+                      
                       <div class="form-group last mb-4">
                         <label>비밀번호</label>
-                        <input type="password" class="form-control" id="userPw">
+                        <input type="password" class="form-control" id="userPw" name="userPw">
                         
                       </div>
                       
@@ -109,7 +111,10 @@
                         <span class="ml-auto"><a href="#" class="forgot-pass">비밀번호 찾기</a></span> 
                       </div>
         
-                      <input type="submit" value="Log In" class="btn text-white btn-block btn-success">
+                      
+                      <button type="button" class="btn text-white btn-block btn-success" id="loginBtn" >로그인</button>
+                      
+                      
         
                       <span class="d-block text-left my-4 text-muted"> 소셜 로그인</span>
                       
@@ -126,15 +131,15 @@
                         </a> -->
 
                         <a href="#" class="naver">
-                            <img src="/img/btnG_Naver.png" alt="Image" class="img-sns">
+                            <img src="${pageContext.request.contextPath }/resources/img/btnG_Naver.png" alt="Image" class="img-sns">
                         </a> 
 
                         <a href="#" class="kakao">
-                            <img src="/img/kakao_icon.png" alt="Image" class="img-sns">
+                            <img src="${pageContext.request.contextPath }/resources/img/kakao_icon.png" alt="Image" class="img-sns">
                         </a> 
 
                         <a href="#" class="google">
-                            <img src="/img/btn-google.svg" alt="Image" class="img-sns">
+                            <img src="${pageContext.request.contextPath }/resources/img/btn-google.svg" alt="Image" class="img-sns">
                         </a> 
 
                       </div>
@@ -150,17 +155,30 @@
 
     </section>
     
-        <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+
+    <script>
+	$(function(){
+		$('#loginBtn').click(function(){
+			console.log('로그인 요청 ');
+			
+			if ($('#userId').val() === ''){
+				alert('아이디를 입력해주세요.');
+				return;
+			}
+			else if($('#userPw').val() === ''){
+				alert('비밀번호를 입력해주세요.')
+				return;
+			}
+			else{
+				$('#loginForm').submit();
+			}
+		});
+			
+		
+	}); 
+	
+	</script>
     
     
     
-<%@ include file="../include/HEADER.jsp"%>
+<%@ include file="../include/FOOTER.jsp"%>

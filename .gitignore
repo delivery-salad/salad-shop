@@ -1,1 +1,12 @@
+<<<<<<< HEAD
 Hikariconfig.properties
+=======
+
+
+*config.properties
+
+
+servlet-context.xml
+
+root-context.xml
+>>>>>>> ad1f0f685db24285fb0cb703969e329227a08378
