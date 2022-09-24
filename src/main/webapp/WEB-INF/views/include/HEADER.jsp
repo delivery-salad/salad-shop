@@ -26,8 +26,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/css/owl.carousel.min.css" >
     <link rel="stylesheet" href="${pageContext.request.contextPath }/css/slicknav.min.css" >
     <link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css" >
-
-
+    
+    
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style>
     .menu-image{
         
@@ -146,5 +148,3 @@
     </section>
     <!-- Categories Section End -->
 
-</body>
-</html>

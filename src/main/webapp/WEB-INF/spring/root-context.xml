@@ -33,6 +33,9 @@
 	</bean>
 	
 	<mybatis-spring:scan base-package="com.delivery.salad.user.mapper" />
+
+	<mybatis-spring:scan base-package="com.delivery.salad.product.mapper" />	
+	
 	
 </beans>
 

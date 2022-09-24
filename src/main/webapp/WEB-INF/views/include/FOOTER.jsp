@@ -4,11 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
 
 <style>
 	.menu-image{
@@ -33,19 +29,7 @@
     }
 
 </style>
-</head>
-<body>
 
-    <!-- Js Plugins -->
-    <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/jquery.nice-select.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/jquery.slicknav.js"></script>
-    <script src="${pageContext.request.contextPath }/js/mixitup.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/main.js"></script>
-    
     <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">

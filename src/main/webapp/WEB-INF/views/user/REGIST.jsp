@@ -3,17 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-
-
-
-
-
 
 
   <style>
@@ -63,10 +52,8 @@
     }
   </style>
   
-<body>
 
-  <jsp:include page="../include/HEADER.jsp" />
-
+<%@ include file="../include/HEADER.jsp"%>
 
 <section>
   <div class="container cont" >
@@ -354,11 +341,9 @@
     }, false);
   </script> -->
   
-  <jsp:include page="../include/FOOTER.jsp" />
-  
 
   
-</body>
+
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -388,4 +373,5 @@ window.onload = function(){
     });
 }
 </script>
-</html>
+
+<%@ include file="../include/FOOTER.jsp"%>
