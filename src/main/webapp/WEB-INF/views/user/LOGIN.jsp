@@ -113,6 +113,8 @@
         
                       
                       <button type="button" class="btn text-white btn-block btn-success" id="loginBtn" >로그인</button>
+                      <button type="button" class="btn text-white btn-block btn-success" id="registBtn" >회원가입</button>
+                      
                       
                       
         
@@ -130,11 +132,14 @@
                             <img src="/img/btn_google_signin_light_normal_web@2x.png" alt="Image" class="img-sns">
                         </a> -->
 
-                        <a href="#" class="naver">
+                        <%-- <a href="<c:url value='/user/login_naver'/>" class="naver"> --%>
+                        <a href="${url }" class="naver">
+                        
                             <img src="${pageContext.request.contextPath }/resources/img/btnG_Naver.png" alt="Image" class="img-sns">
                         </a> 
 
-                        <a href="#" class="kakao">
+                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=RESTAPI_KEY&redirect_uri=http://localhost/salad/user/kakaoLogin&response_type=code" class="kakao">
+                        <!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요 -->
                             <img src="${pageContext.request.contextPath }/resources/img/kakao_icon.png" alt="Image" class="img-sns">
                         </a> 
 
@@ -172,6 +177,11 @@
 			else{
 				$('#loginForm').submit();
 			}
+		});
+		
+		$('#registBtn').click(function(){
+			console.log('회원가입 요청');
+			location.href = "<c:url value='/user/regist'/>";
 		});
 			
 		

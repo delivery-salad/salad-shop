@@ -74,7 +74,7 @@
             <div class="col-md-6 mb-3">
               <label for="nickname">아이디</label>
               <input type="text" class="form-control" id="id" name = "userId" placeholder="" value="" required>
-              <button type="button" class="input-group-text btn-add-style btn-outline-secondary double-check-btn" id="double-check-btn">중복확인</button>
+              <button type="button" class="input-group-text btn-add-style btn-outline-secondary double-check-btn" id="double-check-btn" disabled>중복확인</button>
               
               <div class="invalid-feedback">
                 아이디
@@ -321,7 +321,8 @@
 								
 
             </textarea>
-            <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
+            <input type="checkbox" id="check-box">
+            <label >개인정보 수집 및 이용에 동의합니다.</label>
           </div>
           <div class="mb-4"></div>
 
@@ -469,6 +470,8 @@
 		
 		$('#joinBtn').click(function(){
 			console.log('회원가입 요청');
+			const check = document.getElementById("check-box");
+			
 			
 			if(!$('#id').attr('readonly')) {
 				alert('아이디 중복체크는 필수입니다.');
@@ -480,6 +483,9 @@
 			} else if($('#name').val() === '') {
 				alert('이름은 필수입니다.');
 				$('#name').focus();
+				return;
+			} else if(!check.checked){
+				alert('개인정보 수집 동의는 필수입니다.');
 				return;
 			} else {
 				console.log('회원가입요청')
@@ -509,10 +515,14 @@
     id.onkeyup = function() {
         /*자바스크립트의 정규표현식 입니다*/
         /*test메서드를 통해 비교하며, 매칭되면 true, 아니면 false반*/
+        
+        var check_id_btn = document.getElementById('double-check-btn');
+        
         var regex = /^[A-Za-z0-9+]{4,12}$/; 
         if(regex.test(document.getElementById("id").value )) {
             document.getElementById("id").style.borderColor = "green";
             /* document.getElementById("msgId").innerHTML = "아이디 중복체크는 필수 입니다"; */
+            check_id_btn.disabled=false;
 
         } else {
             document.getElementById("id").style.borderColor = "red";
