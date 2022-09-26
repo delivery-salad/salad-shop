@@ -1,5 +1,7 @@
 package com.delivery.salad.product;
 
+import java.util.Random;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,11 @@ public class ProductRegistTest {
 	@Test
 	public void productRegistTest() {
 		ProductVO vo= new ProductVO();
-		
 		for(int i=1;i<=270;i++) {
 			vo.setProductPrice(10000+i);
-			vo.setProductCount(1000);
-			vo.setProductNum(7777+i);
-			vo.setProductContent("경민경민"+i);
+			vo.setProductCount(1000+i);
+			vo.setProductName(i+"번째 상품 이름");
+			vo.setProductContent(i+"번째 상품의 간단한 내용입니다");
 			
 			productMapperTest.productRegist(vo);
 			
