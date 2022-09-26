@@ -1,16 +1,96 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-</head>
-<body>
-<c:forEach  var="product" items="${productList}">
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<%@ include file="../include/HEADER.jsp"%>
+
+
+
+
+<section class="product spad">
+	<div class="container">
+
+		<div class="row">
+			<c:forEach var="product" items="${productList}">
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="product__item text-center">
+						<a
+							href="<c:url value='/product/productSelect/productNum=${product.productNum}' />">
+							<img alt="xx" src="<c:url value='/resources/img/logo.png'/> ">
+						</a>
+						<div class="product__item__text">
+							<h6>
+								<a
+									href="<c:url value='/product/productSelect/productNum=${product.productNum}' />">${product.productName}</a>
+							</h6>
+							<h5>
+								<fmt:formatNumber pattern="###,###,###"
+									value="${product.productPrice}" />
+								원
+							</h5>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+
+
+
+
+
+
+
+		</div>
+	
+
+		
+	
+		<div class="d-flex justify-content-center">
+		<form action="<c:url value='/product/productList' />" name="pageForm">
+     <nav aria-label="Page navigation example">
+               <ul class="pagination" id="pagination">
+               
+               
+                  <c:if test="${pagecreate.prev}">
+                     <li class="page-item "><a class="page-link" href="#"
+                        data-pageNum="${pagecreate.beginPage-1}">&laquo;</a></li>
+                  </c:if>
+
+                  <c:forEach var="num" begin="${pagecreate.beginPage}"
+                     end="${pagecreate.endPage}">
+                     <li class="page-item    ${pagecreate.paging.pageNum == num ? 'active' : ''}"><a class="page-link"
+                        href="#" data-pagenum="${num}">${num}</a></li>
+                  </c:forEach>
+
+                  <c:if test="${pagecreate.next}">
+                     <li class="page-item"><a class="page-link" href="#"
+                        data-pageNum="${pagecreate.endPage+1}">&raquo;</a></li>
+                  </c:if>
+               </ul>
+
+               <!-- 페이지 관련 버튼을 클릭 시 같이 숨겨서 보낼 값 -->
+               <input type="hidden" name="pageNum"
+                  value="${pagecreate.paging.pageNum}"> <input type="hidden"
+                  name="countPerPage" value="${pagecreate.paging.countPerPage}">
+
+
+            </nav>
+         </form>
+		</div>
+			
+		</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<%-- <c:forEach  var="product" items="${productList}">
 
 <a href="<c:url value='/product/productSelect/productNum=${product.productNum}' />">
 <img alt="xx" src="<c:url value='/resources/img/logo.png'/> ">
@@ -26,40 +106,35 @@
 <input type="text" value="<fmt:formatDate value='${product.productRegistDate }' pattern='yyyy-MM-dd HH:mm:ss' />">
 <input type="text" value="<fmt:formatDate value='${product.productUpdateDate }' pattern='yyyy-MM-dd HH:mm:ss' />">
 
+</c:forEach> --%>
 
 
 
 
 
-<br>
-<br>
-<hr>
-<hr>
-</c:forEach>
-       <form action="<c:url value='/product/productList' />" name="pageForm">
-	                        <div class="text-center clearfix">
-	                            <ul class="pagination" id="pagination">
-	                            	<c:if test="${pagecreate.prev}">
-	                                	<li class="page-item "><a  class="page-link" href="#" data-pageNum="${pagecreate.beginPage-1}">Prev</a></li>
-	                                </c:if>
-	                                
-	                                <c:forEach var="num" begin="${pagecreate.beginPage}" end="${pagecreate.endPage}">
-	                                	<li class="${pagecreate.paging.pageNum == num ? 'active' : ''}"><a href="#" data-pagenum="${num}">${num}</a></li>
-	                                </c:forEach>
-	                                
-	                                <c:if test="${pagecreate.next}">
-	                               		<li class="page-item"><a class="page-link" href="#" data-pageNum="${pagecreate.endPage+1}">Next</a></li>
-	                                </c:if>
-	                            </ul>
-	                            
-	                            <!-- 페이지 관련 버튼을 클릭 시 같이 숨겨서 보낼 값 -->
-	                            <input type="hidden" name="pageNum" value="${pagecreate.paging.pageNum}">
-	                            <input type="hidden" name="countPerPage" value="${pagecreate.paging.countPerPage}">
 
-	                            
-	                        </div>
-                        </form>
-</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%@ include file="../include/FOOTER.jsp"%>
 <script>
 	$(function() {
 	
@@ -74,4 +149,3 @@
 		
 	})
 </script>
-</html>
