@@ -34,17 +34,23 @@
 				</div>
 			</c:forEach>
 
-
-
-
-
-
-
-		</div>
 	
 
 		
+
+		
+		</div>
+		
+
+
+
+
+
+
+
+
 	
+		<!-- 페이징 처리  -->
 		<div class="d-flex justify-content-center">
 		<form action="<c:url value='/product/productList' />" name="pageForm">
      <nav aria-label="Page navigation example">
@@ -77,8 +83,34 @@
             </nav>
          </form>
 		</div>
-			
+		<!-- 페이징 처리 종료  --> 
+
+
+
+
+		<c:if test="">
+		
+		</c:if>
+	
+		<!--  상품 등록 -->
+		<div class="d-flex justify-content-end" style="margin: 0 60px 0 0; ">
+			<button  type="button" class="btn btn-outline-primary" onclick="location.href='<c:url value='/product/productRegist' />'">상품 등록</button>
 		</div>
+		<!--  상품 등록 종료  -->
+	
+
+		
+	
+
+			
+			
+			
+			
+			
+			
+			
+			
+		</div> <!-- container 종료  -->
 
 
 
