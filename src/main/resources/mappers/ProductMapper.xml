@@ -41,8 +41,8 @@
 <!-- 상품 등록  -->
 <insert id="productRegist"   useGeneratedKeys="true" keyColumn="PRODUCTNUM" keyProperty="productNum">
 
-	INSERT INTO PRODUCT(PRODUCTPRICE,PRODUCTCOUNT,PRODUCTNAME,PRODUCTCONTENT)
-	VALUES(#{productPrice},#{productCount},#{productName},#{productContent})
+	INSERT INTO PRODUCT(PRODUCTPRICE,PRODUCTCOUNT,PRODUCTNAME,PRODUCTCONTENT,PRODUCTIMGURL,PRODUCTIMGNAME,PRODUCTCONTENTIMGURL,PRODUCTCONTENTIMGNAME)
+	VALUES(#{productPrice},#{productCount},#{productName},#{productContent},#{productImgUrl},#{productImgName},#{productContentImgUrl},#{productContentImgName})
 </insert>
 
 <!--  상품 수정  -->

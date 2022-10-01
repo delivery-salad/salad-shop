@@ -16,8 +16,9 @@
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="product__item text-center">
 						<a
-							href="<c:url value='/product/productSelect/productNum=${product.productNum}' />">
-							<img alt="xx" src="<c:url value='/resources/img/logo.png'/> ">
+							href="<c:url value='/product/productSelect/productNum=${product.productNum}&fileName=${product.productImgName}' />">
+							<img alt="" src="<c:url value ='/product/productImgGet/fileName=${product.productImgName}' /> " name="productImgName">
+							
 						</a>
 						<div class="product__item__text">
 							<h6>
@@ -32,19 +33,26 @@
 						</div>
 					</div>
 				</div>
+
 			</c:forEach>
 
 
 
-
-
-
-
-		</div>
-	
+		
 
 		
+		</div>
+		
+
+
+
+
+
+
+
+
 	
+		<!-- 페이징 처리  -->
 		<div class="d-flex justify-content-center">
 		<form action="<c:url value='/product/productList' />" name="pageForm">
      <nav aria-label="Page navigation example">
@@ -77,8 +85,34 @@
             </nav>
          </form>
 		</div>
-			
+		<!-- 페이징 처리 종료  --> 
+
+
+
+
+		<c:if test="">
+		
+		</c:if>
+	
+		<!--  상품 등록 -->
+		<div class="d-flex justify-content-end" style="margin: 0 60px 0 0; ">
+			<button  type="button" class="btn btn-outline-primary" onclick="location.href='<c:url value='/product/productRegist' />'">상품 등록</button>
 		</div>
+		<!--  상품 등록 종료  -->
+	
+
+		
+	
+
+			
+			
+			
+			
+			
+			
+			
+			
+		</div> <!-- container 종료  -->
 
 
 
@@ -145,7 +179,12 @@
 			console.log(value);
 	 		document.pageForm.pageNum.value = value;
 			document.pageForm.submit(); 
+
 		});
 		
 	})
+	
+		let ss='C:\\test\\upload\\31a0d497.jpg';
+		console.log(ss.substring(0,ss.lastIndexOf("\\")));
+		console.log('zzzzzzzzzz');
 </script>
