@@ -118,13 +118,15 @@
 								</div>
 							</div>
 						</div>
-                        <a href="/order/cart/${user.userId} " class="primary-btn cart-btn">ADD TO CART</a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+               
               			
               			  <div class="text-left product_count" style="margin-top: 30px;">
-                                <button type="button" class="btn btn-secondary" style="width: 200px;">장바구니</button>
+                                <button type="button" class="btn btn-secondary cart-btn " style="width: 200px;">장바구니</button>
                                 <button type="button" class="btn btn-success buy-btn" style="width: 200px;">구매</button>
                             </div>
+                                <div class="text-left " style="margin-top: 30px">
+                                	        <button type="button" class="btn btn-danger"  onclick="location.href='<c:url value='/product/productModify/productNum=${product.productNum}' />' " style="width: 400px;">상품수정</button>
+         						</div>
                     </div>
                 </div>
         <div class="col-lg-12 col-md-12" id='scroll_menu' style="padding:0px;  hebackground-color:gray;  z-index:100; height: 100px;" >
@@ -136,10 +138,12 @@
 			
          
          </div>          
+     
+         
+         
                 
                 
          <div class="col-lg-12" style="margin-top:100px " id="detail">
-        	<h1>상품의 상세 이미지가 들어갈 공간 </h1>
          	<img alt="" src="<c:url value='/product/productImgGet/fileName=${product.productContentImgName}' />">
          
          </div>       
@@ -382,11 +386,11 @@
 
 
 
-        /** 장바구니 start */
+/** 장바구니 start */
         
         /** 서버로 전송할 데이터 */
         const form = {
-        		userId : '${user.userId}',
+        		userId : '${login.userEmail}',
         		productNum : '${product.productNum}',
         		productCount: ''
         }
@@ -395,9 +399,13 @@
         $(".cart-btn").on("click", function(e){
         	form.productCount = $(".valval").val();
         	$.ajax({
-        		url:'/order/addCart',
+        		url:'<c:url value="/order/addCart" />',
         		type: 'POST',
-        		data: form,
+        		data: JSON.stringify(form),
+        		headers : {
+        			'Content-Type' : 'application/json'
+        		},
+        		dataType:'text',
         		success:function(result){
       				if(result == '0'){
       					alert("장바구니에 추가하지 못하였습니다.");
@@ -408,6 +416,8 @@
       				} else if(result == '3'){
       					alert("로그인이 필요합니다.");
       				}
+        		},error: function(){
+        			alert("실패!");
         		}
         	})
         }); //장바구니 끝 
