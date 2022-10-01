@@ -215,30 +215,27 @@
                 <div class="total-box">
                     
 
-                    <div class="boxbox">
-                        <div class="box1">아이디</div>
-                        <div class="box2 joinName">moon123</div>
-                    </div>
+                    
 
 
 
                     <div class="boxbox">
                         <div class="box1">이메일</div>
-                        <div class="box2 joinEmail">hong123@gmail.com</div>
+                        <div class="box2 joinEmail">${login.userEmail }</div>
                     </div>
 
                     <div class="boxbox">
                         <div class="box1">휴대전화</div>
-                        <div class="box2 joinPhone">010 2345 6789</div>
+                        <div class="box2 joinPhone">${login.userPhone }</div>
                     </div>
 
                     <div class="boxbox">
                         <div class="box1">주소</div>
-                        <div class="box2 joinAddrBasic">서울시 강남구 테헤란로 7길</div>
+                        <div class="box2 joinAddrBasic">${login.userBasicAddr }</div>
                     </div>
                     <div class="boxbox">
                         <div class="box1">상세주소</div>
-                        <div class="box2 joinAddrDetail">길동 빌딩 7층</div>
+                        <div class="box2 joinAddrDetail">${login.userDetailAddr }</div>
                     </div>
         
                 </div>
@@ -246,10 +243,10 @@
             
                 <div class="btn-box">
                     <div class="modif-fin-btn">
-                        <button type="button" onclick="location.href=''" class="btn btn-outline-secondary px-3">수정</button>
+                        <button type="button" onclick="location.href='<c:url value='/user/moveMyModi'/>'" class="btn btn-outline-secondary px-3">수정</button>
                     </div>
                     <div class="cencel-btn">
-                        <button type="submit" onclick="location.href='index.html'" class="btn btn-outline-secondary px-3">취소</button>
+                        <button type="button" onclick="history.back()" class="btn btn-outline-secondary px-3">취소</button>
                     </div>
                 </div>
 
@@ -262,15 +259,15 @@
     </div>
 
 
-        <!-- The sidebar -->
+                <!-- The sidebar -->
         <div class="sidebar">
             <ul>
                 <li>
                     <h3>주문 목록 </h3>
                     <ul>
                         <li><a href="#home">주문목록/배송 조회</a></li>
-                        <li><a href="#news">취소/교환 내역</a></li>
-                        <li><a href="#contact">환불 내역</a></li>
+                        <li><a href="<c:url value='/user/moveMyCanEx'/>">취소/교환 내역</a></li>
+                        <li><a href="<c:url value='/user/moveMyRe'/>">환불 내역</a></li>
                     </ul>
                     <!-- 호버 될 때 마다 active 클래스 추가 -->
                 </li>
@@ -278,10 +275,10 @@
                 <li>
                     <h3>회원정보</h3>
                     <ul>
-                        <li><a href="#home">회원정보 조회</a></li>
-                        <li><a href="#news">배송지 관리</a></li>
-                        <li><a href="#contact">비밀번호 변경</a></li>
-                        <li><a href="#contact">회원탈퇴</a></li>
+                        <li><a href="<c:url value='/user/moveMyUs'/>">회원정보 조회</a></li>
+                        <%-- <li><a href="<c:url value='/user/moveMyADDR'/>">배송지 관리</a></li> --%>
+                        <li><a href="<c:url value='/user/moveMyAu'/>">비밀번호 변경</a></li>
+                        <li><a href="<c:url value='/user/moveMyDel'/>">회원탈퇴</a></li>
                     </ul>
 
                 </li>

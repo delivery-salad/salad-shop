@@ -6,8 +6,6 @@
 
 
     <style>
-    
-
     .input-form {
       max-width: 680px;
 
@@ -35,7 +33,7 @@
   }
 }
 
-    
+
 
     .sidebar {
         margin-left:30px;
@@ -98,26 +96,94 @@
 
     /* 본문이 들어가는 스타일 */
     .main-content{
-        margin-top: 70px;
         margin-left: 250px;
         position:absolute;
         width: 70%;
         padding-left: 30px;
     }
 
-    .announcement-table{
+    /* 유저 수정 폼 */
+    .total-box{
+        
+        border: 1px solid rgb(189, 186, 186);
+        border-radius: 20px;
+        max-width: 800px;
+        min-width: 500px;
+        padding: 20px 0;
+        margin-left: 100px;
+        margin-top:80px;
+        
+    }
+    
+    .box1{
+        border-radius: 20px;
+        background-color: #EFEFEF;
+        color: #676767;
+        min-width: 25%;
+        height: 40px;
+        line-height: 40px;
+        margin-left: 10%;
+        margin-right: 10%;
+        float: left;
+        text-align: center;
+    }
+    .box2{
+        color: #676767;
+        width: 75%;
+        height: 40px;
+        line-height: 40px;
+        margin: 0 5%;
+    }
+    .boxbox{
+        display: flex;
+        margin: 5% auto;
+    }
+
+    /* .title-box{
+        text-align: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 30px !important;
+        border:1px solid lightgray;
+        border-radius: 40px;
+        width: 200px;
+        background-color: rgb(228, 227, 227);
+        color: rgb(132, 127, 127);
+        font-weight: 500 !important;
+    } */
+
+    .btn-box::after{
+        display: block;
+        content: '';
+        clear: both;
+    }
+    
+    button:hover{
+        cursor: pointer;
+    }
+    .btn-box{
+        max-width: 800px;
+        min-width: 400px;
+        margin-left: 350px;
         margin-top:30px;
     }
 
-    /* 최근 주문정보 form */
-    .form-total{
-        width: 60%;
+    .form-total-box{
+        max-width: 800px;
+        min-width: 400px;
     }
     
+    .modif-fin-btn{
+        float:left;
+        margin-right: 20%;
+        box-sizing: border-box;
+        text-align: center;
+    }
 
-    h3{
-        margin-top:50px;
-        margin-bottom: 15px;
+    .cencel-btn{
+        float:left;
+        box-sizing: border-box;
+        text-align: center;
     }
 
   </style>
@@ -140,54 +206,64 @@
         </div>  -->
 
         <div class="main-content">
-            <h2>${login.userName } 님  반갑습니다.</h2>
-            <hr>
-            <div class="recent-delivery">
-                <h3>최근 주문정보</h3>
-                <p>최근 30일 내에 주문하신 내역입니다.</p>
-                <hr>
-                
-                <table class="announcement-table table table-hover">
-                    <thead style="background-color: #e9ecef; ">
-                        <th scope="col">주문 번호</th>
-                        <th scope="col">상품명</th>
-                        <th scope="col">수량</th>
-                        <th scope="col">금액</th>
-                        <th scope="col">주문상태</th>
-                    </thead>
+        <!-- Start 나의 정보 [개인]수정-->
+        <div>
 
-                    <tbody style="border-top : 3px solid #e9ecef">
-                    <tr>
-                        <td>1</td>
-                        <td>고기 샐러드</td>
-                        <td>1</td>
-                        <td>30,000</td>
-                        <!-- Javascript를 사용해서 날짜 입력받거나  -->
-                        <td>배송 준비중</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>연어 샐러드</td>
-                        <td>3</td>
-                        <td>15,000</td>
-                        <td>배송 중</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>트러플 샐러드</td>
-                        <td>2</td>
-                        <td>80,000</td>
-                        <td>배송 완료</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <form class="form-total-box" action = "<c:url value='/user/KakaoChAddr'/>" method="post" role="form">
 
-            <hr>
+
+                <div class="total-box">
+                    
+
+                    <div class="boxbox">
+                        <div class="box1">이메일</div>
+                        <div class="box2 joinEmail">${login.userEmail }</div>
+                    </div>
+
+                    <div class="boxbox">
+                        <div class="box1">휴대전화</div>
+                        <div class="box2 input-group joinAddrDetail">
+                        	<input type="text" class="form-control" id="phone" name="userPhone" placeholder="01023456789">
+                        </div>
+                    </div>
+
+                    <div class="boxbox">
+                        <label class="box1" for="inputJoinAddrBasic">기본주소</label>
+                        <div class="box2 input-group joinAddrBasic">
+                            <input type="text" class="form-control" id="basic-address" name="userBasicAddr">
+                        </div>
+                    </div>
+                    <div class="boxbox">
+                        <label class="box1" for="inputJoinAddrDetail">상세주소</label>
+                        <div class="box2 input-group joinAddrDetail">
+                            <input type="text" class="form-control" id="detail-address" name="userDetailAddr">
+                        </div>
+                    </div>
+        
+                </div>
+
+				<input type="hidden" name="userEmail" value = ${login.userEmail }>
+				
+            
+                <div class="btn-box">
+                    <div class="modif-fin-btn">
+                        <button type="submit"  class="btn btn-outline-secondary px-3">등록완료</button>
+                    </div>
+                    <div class="cencel-btn">
+                        <button type="button" onclick="history.back()" class="btn btn-outline-secondary px-3">취소</button>
+                    </div>
+                </div>
+
+
+
+
+
+            </form>
+        </div>
     </div>
 
 
-        <!-- The sidebar -->
+                <!-- The sidebar -->
         <div class="sidebar">
             <ul>
                 <li>
@@ -228,21 +304,22 @@
 
 
       </section>
-      
-      <script>
-      
-      const msg = '${msg}';
-      console.log(msg);
-      if (msg == '1'){
-    	  alert('카카오 및 네이버 로그인 첫 사용자는 회원정보 조회에서 주소를 입력해주세요.');
-      }
-      
-      
-      
-      	
-      	
-      
-      </script>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+
+
+window.onload = function(){
+    document.getElementById("basic-address").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("basic-address").value = data.address; // 주소 넣기
+                document.querySelector("input[id=detail-address]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
+</script>
 
 <%@ include file="../include/FOOTER.jsp"%>

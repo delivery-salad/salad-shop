@@ -189,15 +189,15 @@
     </div>
 
 
-        <!-- The sidebar -->
+                <!-- The sidebar -->
         <div class="sidebar">
             <ul>
                 <li>
                     <h3>주문 목록 </h3>
                     <ul>
                         <li><a href="#home">주문목록/배송 조회</a></li>
-                        <li><a href="#news">취소/교환 내역</a></li>
-                        <li><a href="#contact">환불 내역</a></li>
+                        <li><a href="<c:url value='/user/moveMyCanEx'/>">취소/교환 내역</a></li>
+                        <li><a href="<c:url value='/user/moveMyRe'/>">환불 내역</a></li>
                     </ul>
                     <!-- 호버 될 때 마다 active 클래스 추가 -->
                 </li>
@@ -205,9 +205,10 @@
                 <li>
                     <h3>회원정보</h3>
                     <ul>
-                        <li><a href="#home">회원정보 변경</a></li>
-                        <li><a href="#news">배송지 관리</a></li>
-                        <li><a href="#contact">회원탈퇴</a></li>
+                        <li><a href="<c:url value='/user/moveMyUs'/>">회원정보 조회</a></li>
+                        <%-- <li><a href="<c:url value='/user/moveMyADDR'/>">배송지 관리</a></li> --%>
+                        <li><a href="<c:url value='/user/moveMyAu'/>">비밀번호 변경</a></li>
+                        <li><a href="<c:url value='/user/moveMyDel'/>">회원탈퇴</a></li>
                     </ul>
 
                 </li>

@@ -209,35 +209,38 @@
         <!-- Start 나의 정보 [개인]수정-->
         <div>
 
-            <form class="form-total-box" method="post" role="form">
+            <form class="form-total-box" action="<c:url value= '/user/PwAuth' />" method="post" role="form">
 
 
                 <div class="total-box">
                     
 
                     <div class="boxbox">
-                        <div class="box1">아이디</div>
-                        <div class="box2 joinName">moon123</div>
+                        <div class="box1">이메일</div>
+                        <div class="box2 joinName">${login.userEmail }</div>
                     </div>
 
 
                     <div class="boxbox">
                         <label class="box1">비밀번호</label>
                         <div class="box2 input-group password">
-                            <input type="password" class="form-control" id="pw" >
+                            <input type="password" class="form-control" id="pw" name = "userPw">
                         </div>
                     </div>
                     
         
                 </div>
+                
+                <input type="hidden" name="userEmail" value = ${login.userEmail }>
+                
 
             
                 <div class="btn-box">
                     <div class="modif-fin-btn">
-                        <button type="button" onclick="location.href=''" class="btn btn-outline-secondary px-3">비밀번호 변경</button>
+                        <button type="submit"  class="btn btn-outline-secondary px-3">수정</button>
                     </div>
                     <div class="cencel-btn">
-                        <button type="submit" onclick="location.href='index.html'" class="btn btn-outline-secondary px-3">취소</button>
+                        <button type="button" onclick="history.back()" class="btn btn-outline-secondary px-3">취소</button>
                     </div>
                 </div>
 
@@ -250,15 +253,15 @@
     </div>
 
 
-        <!-- The sidebar -->
+                <!-- The sidebar -->
         <div class="sidebar">
             <ul>
                 <li>
                     <h3>주문 목록 </h3>
                     <ul>
                         <li><a href="#home">주문목록/배송 조회</a></li>
-                        <li><a href="#news">취소/교환 내역</a></li>
-                        <li><a href="#contact">환불 내역</a></li>
+                        <li><a href="<c:url value='/user/moveMyCanEx'/>">취소/교환 내역</a></li>
+                        <li><a href="<c:url value='/user/moveMyRe'/>">환불 내역</a></li>
                     </ul>
                     <!-- 호버 될 때 마다 active 클래스 추가 -->
                 </li>
@@ -266,10 +269,10 @@
                 <li>
                     <h3>회원정보</h3>
                     <ul>
-                        <li><a href="#home">회원정보 조회</a></li>
-                        <li><a href="#news">배송지 관리</a></li>
-                        <li><a href="#contact">비밀번호 변경</a></li>
-                        <li><a href="#contact">회원탈퇴</a></li>
+                        <li><a href="<c:url value='/user/moveMyUs'/>">회원정보 조회</a></li>
+                        <%-- <li><a href="<c:url value='/user/moveMyADDR'/>">배송지 관리</a></li> --%>
+                        <li><a href="<c:url value='/user/moveMyAu'/>">비밀번호 변경</a></li>
+                        <li><a href="<c:url value='/user/moveMyDel'/>">회원탈퇴</a></li>
                     </ul>
 
                 </li>

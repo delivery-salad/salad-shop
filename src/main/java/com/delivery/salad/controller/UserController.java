@@ -2,7 +2,9 @@ package com.delivery.salad.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -18,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.delivery.salad.command.KakaoUser;
+import com.delivery.salad.command.NaverUser;
 import com.delivery.salad.command.UserVO;
+
 import com.delivery.salad.user.NaverLogin;
 import com.delivery.salad.user.service.IUserService;
 import com.delivery.salad.user.service.MemberService;
@@ -88,18 +94,26 @@ public class UserController {
 //	}
 	
 	@PostMapping("/user/login")
-	public String Login(UserVO user, Model model) {
+	public String Login(UserVO user, Model model, HttpServletRequest request) {
 		System.out.println("user/login : POST");
 		
 		UserVO loginUser = service.login(user);
+		
+		if(loginUser == null) {
+			
+			return "redirect:/user/regist";
+		}
+		else {
+			System.out.println("login User 확인 : " + loginUser.toString());
+			
+			model.addAttribute("loginUser", loginUser);
 
-		System.out.println("login User 확인 : " + loginUser.toString());
-		
-		// 모델 객체 만들기 
-		// 세션 어디서 만들지 정하기 
-		
-		
-		return "/home";
+			
+			return "redirect:/user/moveMypage";
+		}
+
+
+
 	}
 	
 	/* Naver Login */
@@ -129,7 +143,7 @@ public class UserController {
 	
 	//네이버 로그인 성공시 callback호출 메소드	
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })	
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {				
+	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, RedirectAttributes ra) throws IOException, ParseException {				
 		System.out.println("여기는 callback");		
 		OAuth2AccessToken oauthToken;        
 		oauthToken = naverLogin.getAccessToken(session, code, state);
@@ -144,7 +158,8 @@ public class UserController {
 		//2. String형식인 apiResult를 json형태로 바꿈		
 		JSONParser parser = new JSONParser();		
 		Object obj = parser.parse(apiResult);		
-		JSONObject jsonObj = (JSONObject) obj;				
+		JSONObject jsonObj = (JSONObject) obj;
+		
 		//3. 데이터 파싱 		
 		//Top레벨 단계 _response 파싱		
 		JSONObject response_obj = (JSONObject)jsonObj.get("response");		
@@ -152,25 +167,99 @@ public class UserController {
 		String nickname = (String)response_obj.get("nickname"); 		
 		System.out.println(nickname);				
 		//4.파싱 닉네임 세션으로 저장		
-		session.setAttribute("sessionId",nickname); //세션 생성				
-		model.addAttribute("result", apiResult);	     		
-		return "home";
+		
+		
+		
+	
+		
+		String email = (String) response_obj.get("email");
+		int index = email.indexOf("@");
+		String id = email.substring(0, index);
+		// 아이디 추출 
+		
+		String phone = (String) response_obj.get("mobile");
+		String[] phones = phone.split("-");
+		
+		String totalPhone = phones[0] + phones[1] + phones[2];
+		
+		String nickName = (String) response_obj.get("nickname");
+		
+		NaverUser loginUser = new NaverUser();
+		loginUser.setUserName(nickName);
+		loginUser.setnPhone(totalPhone);
+		loginUser.setUserEmail(email);
+		
+		System.out.println("네이버 로그인 유저 객체 : " + loginUser.toString());
+		model.addAttribute("loginUser", loginUser);
+		session.setAttribute("login",loginUser); 
+		//세션 생성	
+
+		
+		// naver로 가입된 사용자가 있는지 확인하는 로직 
+		int naver = service.findnaver(nickname, email);
+		System.out.println("네이버 : " + naver);
+		if (naver == 0) {
+			service.naverinsert(nickname, email, totalPhone);
+			ra.addFlashAttribute("msg", "1");
+			return "redirect:/user/moveMyADDRNaver";
+
+		}
+		else {
+			service.findnaver(nickname, email);
+			return "redirect:/user/moveMypage";
+		}
+		
+
+		
 	}
 	
 	@Autowired
 	private MemberService ms;
 
 	@RequestMapping(value="/user/kakaoLogin", method=RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session, Model model, RedirectAttributes ra) throws Exception {
 		System.out.println("카카오 로그인 api 발동");
 		System.out.println("#########" + code);
 		
 		String access_Token = ms.getAccessToken(code);
 		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
 		System.out.println("###access_Token#### : " + access_Token);
+		System.out.println(userInfo.toString());
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
 		System.out.println("###email#### : " + userInfo.get("email"));
-		return "home";
+		
+		String email = (String) userInfo.get("email");
+		int index = email.indexOf("@");
+		String id = email.substring(0, index);
+		// 아이디 추출 
+		String nickname = (String) userInfo.get("nickname");
+		
+		KakaoUser loginUser = new KakaoUser();
+		
+		loginUser.setUserName(nickname); 	
+		loginUser.setUserEmail(email);
+		
+		System.out.println("카카오 로그인 유저 객체 : " + loginUser.toString());
+		model.addAttribute("loginUser", loginUser);
+		session.setAttribute("login",loginUser); 
+		
+		
+		// kakao로 가입된 사용자가 있는지 확인하는 로직 
+		int kakao = service.findkakao(nickname, email);
+		System.out.println("카카오 : " + kakao);
+		if (kakao == 0) {
+			service.kakaoinsert(nickname, email);
+			ra.addFlashAttribute("msg", "1");
+			return "redirect:/user/moveMyADDRKakao";
+
+		}
+		else {
+			service.findkakao(nickname, email);
+			return "redirect:/user/moveMypage";
+		}
+		
+
+
     	}
 	
 	@GetMapping("/user/moveMypage")
@@ -180,6 +269,7 @@ public class UserController {
 		return "user/MYPAGE";
 	}
 	
+	// 회원정보 조회 
 	@GetMapping("/user/moveMyUs")
 	public String moveMypageUser() {
 		System.out.println("user/moveMypageUser : GET");
@@ -187,13 +277,87 @@ public class UserController {
 		return "user/MYPAGE_USER";
 	}
 	
-	@GetMapping("/user/moveMyIn")
+	// 회원 정보 조회 -> 수정 버튼 
+	@GetMapping("/user/moveMyModi")
 	public String moveMypageChangeInfo() {
-		System.out.println("user/moveMypageInfo : GET");
+		System.out.println("user/moveMypageModi : GET");
 		
 		return "user/MYPAGE_CHANGE_INFO";
 	}
 	
+	@PostMapping("/user/MyModi")
+	public String MypageModify(UserVO user) {
+		System.out.println("/user/MyModi : POST");
+		
+		System.out.println("회원정보 수정 유저 객체 확인 : " + user.toString());
+		service.modify(user);
+	
+		
+		
+		return "redirect:/user/moveLogin";
+	}
+	
+	// 회원 주소 입력 (배송지 관리) <- 카카오 및 네이버 첫 이용자 주소 등록 
+	@GetMapping("/user/moveMyADDRKakao")
+	public String moveMypageChangeAddrKakao() {
+		System.out.println("user/moveMyADDRKakao : GET");
+		
+		return "user/MYPAGE_CHANGE_ADDR_KAKAO";
+	}
+	
+	// 회원 주소 입력 (배송지 관리) <- 카카오 및 네이버 첫 이용자 주소 등록 
+	@GetMapping("/user/moveMyADDRNaver")
+	public String moveMypageChangeAddrNaver() {
+		System.out.println("user/moveMyADDRNaver : GET");
+		
+		return "user/MYPAGE_CHANGE_ADDR_NAVER";
+	}
+	
+	// 카카오 전용 첫 주소 입력 
+	@PostMapping("/user/KakaoChAddr")
+	public String ChAddrKakao(UserVO user, HttpSession session) {
+		System.out.println("user/ChAddr : POST");
+		service.updateKakaoAddr(user);
+		
+		// 회원정보 업데이트 되었으니 세션 다시 생성해줌 
+		session.removeAttribute("login");
+		
+		String Phone = user.getUserPhone();
+		UserVO kakaoUser = service.searchKakao(Phone);
+		// 전화번호로 가져오기 
+		
+		System.out.println("카카오 정보 가져오는지 확인 " + kakaoUser);
+		
+		session.setAttribute("login", kakaoUser);
+		
+		
+		return "redirect:/user/moveMypage";
+		
+	}
+	
+	// 네이버  전용 첫 주소 입 
+	@PostMapping("/user/NaverChAddr")
+	public String ChAddrNaver(UserVO user, HttpSession session) {
+		System.out.println("user/ChAddr : POST");
+		service.updateKakaoAddr(user);
+		
+		// 회원정보 업데이트 되었으니 세션 다시 생성해줌 
+		session.removeAttribute("login");
+		
+		String Phone = user.getUserPhone();
+		UserVO kakaoUser = service.searchKakao(Phone);
+		// 전화번호로 가져오기 
+		
+		System.out.println("네이버 정보 가져오는지 확인 " + kakaoUser);
+		
+		session.setAttribute("login", kakaoUser);
+		
+		
+		return "redirect:/user/moveMypage";
+		
+	}
+	
+	// 비밀번호 변경 검증 화면 (사이드바) 
 	@GetMapping("/user/moveMyAu")
 	public String moveMypageAuthPW() {
 		System.out.println("user/moveMypageAuth : GET");
@@ -201,6 +365,28 @@ public class UserController {
 		return "user/MYPAGE_AUTH_PW";
 	}
 	
+	@PostMapping("/user/PwAuth")
+	public String MypagePwAuth(UserVO user ) {
+		System.out.println("/user/PwAuth : POST");
+		System.out.println("비밀번호 검증 : " + user.toString());
+
+		UserVO loginUser = service.login(user);
+		
+		if (loginUser == null) {
+			System.out.println("비밀번호 검증실패");
+			return "redirect:/user/moveLogin";
+
+		}
+		else {
+			System.out.println("비밀번호 검증 성공 ");
+			return "redirect:/user/moveMyChPw";
+
+		}
+		
+
+	}
+	
+	// 실제 비밀번호 변경 화면 
 	@GetMapping("/user/moveMyChPw")
 	public String moveMypageChangePW() {
 		System.out.println("user/moveMypageChangePw : GET");
@@ -208,6 +394,33 @@ public class UserController {
 		return "user/MYPAGE_CHANGE_PW";
 	}
 	
+	@PostMapping("/user/ChPw")
+	public String MypageChangePw(Model model, UserVO user) {
+		System.out.println("user/ChPw : POST");
+		System.out.println("비밀번호 변경 유저 : " + user.toString());
+		
+		service.ChPw(user);
+		
+		return "redirect:/user/moveLogin";
+
+	}
+	
+	@GetMapping("/user/moveMyDel")
+	public String moveMypageDelete() {
+		System.out.println("user/moveMyDel : GET");
+		
+		return "user/MYPAGE_USER_DELETE";
+	}
+	
+	@PostMapping("/user/MyDel")
+	public String MypageDelete(UserVO user) {
+		System.out.println("user/MyDel : POST");
+		
+		service.delete(user);
+		return "redirect:/user/moveLogin";
+	}
+	
+	// 취소/ 교환 내역 
 	@GetMapping("/user/moveMyCanEx")
 	public String moveMypageCancelExchagne() {
 		System.out.println("user/moveMypageCancelExchange : GET");
@@ -215,6 +428,8 @@ public class UserController {
 		return "user/MYPAGE_CANCEL_EXCHANGE";
 	}
 	
+	
+	// 환불내역 
 	@GetMapping("/user/moveMyRe")
 	public String moveMypageReturn() {
 		System.out.println("user/moveMyRe : GET");

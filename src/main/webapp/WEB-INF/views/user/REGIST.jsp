@@ -71,7 +71,7 @@
                 이름을 입력해주세요.
               </div>
             </div>
-            <div class="col-md-6 mb-3">
+            <!-- <div class="col-md-6 mb-3">
               <label for="nickname">아이디</label>
               <input type="text" class="form-control" id="id" name = "userId" placeholder="" value="" required>
               <button type="button" class="input-group-text btn-add-style btn-outline-secondary double-check-btn" id="double-check-btn" disabled>중복확인</button>
@@ -79,6 +79,17 @@
               <div class="invalid-feedback">
                 아이디
               </div>
+            </div> -->
+            
+            <div class="col-md-6 mb-3">
+            
+	            <label for="email">이메일</label>
+	            <input type="email" class="form-control" id="email" name="userEmail" placeholder="you@example.com" required>
+	            
+	            <input type="text" class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요." maxlength="6" disabled="disabled">
+	            
+	            <button type="button" class="input-group-text btn-add-style btn-outline-secondary double-check-btn" id="email-check-btn">인증</button>
+            
             </div>
           </div>
 
@@ -109,16 +120,7 @@
             
             </div>
             
-            <div class="col-md-6 mb-3">
             
-	            <label for="email">이메일</label>
-	            <input type="email" class="form-control" id="email" name="userEmail" placeholder="you@example.com" required>
-	            
-	            <input type="text" class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요." maxlength="6" disabled="disabled">
-	            
-	            <button type="button" class="input-group-text btn-add-style btn-outline-secondary double-check-btn" id="email-check-btn">인증</button>
-            
-            </div>
           </div>
 
           <!-- <div class="mb-3">
@@ -351,7 +353,7 @@
 <script>
 	$(function(){
 		
-		//아이디 중복 체크 
+		/* //아이디 중복 체크 
 		$('#double-check-btn').click(function() {
 			
 			const JOINID = $('#id').val();
@@ -382,7 +384,7 @@
 				}
 			}); //중복확인 비동기 통신 끝.
 			
-		}); //아이디 중복 체크 끝.
+		}); //아이디 중복 체크 끝. */
 		
 		//인증번호 이메일 전송
 		$('#email-check-btn').click(function() {
@@ -473,10 +475,7 @@
 			const check = document.getElementById("check-box");
 			
 			
-			if(!$('#id').attr('readonly')) {
-				alert('아이디 중복체크는 필수입니다.');
-				return;
-			} else if($('#password').val() === '' || $('#password').val() !== $('#check-password').val()) {
+			if($('#password').val() === '' || $('#password').val() !== $('#check-password').val()) {
 				alert('비밀번호 규칙을 확인하세요.');
 				$('#password').focus();
 				return;
@@ -511,24 +510,24 @@
 	/* 이거 정한 형식대로 바꾸기 */
 	
 	/*아이디 형식 검사 스크립트*/
-    var id = document.getElementById("id");
-    id.onkeyup = function() {
+    /* var id = document.getElementById("id");
+    id.onkeyup = function() { */
         /*자바스크립트의 정규표현식 입니다*/
         /*test메서드를 통해 비교하며, 매칭되면 true, 아니면 false반*/
         
-        var check_id_btn = document.getElementById('double-check-btn');
+        /* var check_id_btn = document.getElementById('double-check-btn');
         
         var regex = /^[A-Za-z0-9+]{4,12}$/; 
         if(regex.test(document.getElementById("id").value )) {
             document.getElementById("id").style.borderColor = "green";
-            /* document.getElementById("msgId").innerHTML = "아이디 중복체크는 필수 입니다"; */
-            check_id_btn.disabled=false;
+            document.getElementById("msgId").innerHTML = "아이디 중복체크는 필수 입니다"; 
+            check_id_btn.disabled=false; */
 
-        } else {
+        /* } else {
             document.getElementById("id").style.borderColor = "red";
-            /* document.getElementById("msgId").innerHTML = ""; */
+            document.getElementById("msgId").innerHTML = ""; 
         }
-    }
+    } */
 	
     
     /*비밀번호 형식 검사 스크립트*/

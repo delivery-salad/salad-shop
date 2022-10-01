@@ -209,26 +209,17 @@
         <!-- Start 나의 정보 [개인]수정-->
         <div>
 
-            <form class="form-total-box" method="post" role="form">
+            <form class="form-total-box" action = "<c:url value='/user/MyModi'/>" method="post" role="form">
 
 
                 <div class="total-box">
                     
 
                     <div class="boxbox">
-                        <div class="box1">아이디</div>
-                        <div class="box2 joinName">moon123</div>
-                    </div>
-
-
-
-                    <div class="boxbox">
                         <div class="box1">이메일</div>
-                        <div class="box2 input-group joinAddrDetail">
-                        	<input type="text" class="form-control" id="email" name="userEmail" placeholder="hong123@gmail.com">
-                        </div>
-                        
+                        <div class="box2 joinName">${login.userEmail }</div>
                     </div>
+
 
                     <div class="boxbox">
                         <div class="box1">휴대전화</div>
@@ -240,26 +231,27 @@
                     <div class="boxbox">
                         <label class="box1" for="inputJoinAddrBasic">기본주소</label>
                         <div class="box2 input-group joinAddrBasic">
-                            <input type="text" class="form-control" id="subject" name="userBasicAddr">
-                            <button class="input-group-text btn-add-style btn-outline-secondary ">주소 찾기</button>
+                            <input type="text" class="form-control" id="basic-address" name="userBasicAddr">
                         </div>
                     </div>
                     <div class="boxbox">
                         <label class="box1" for="inputJoinAddrDetail">상세주소</label>
                         <div class="box2 input-group joinAddrDetail">
-                            <input type="text" class="form-control" id="joinAddrDetail" name="userDetailAddr">
+                            <input type="text" class="form-control" id="detail-address" name="userDetailAddr">
                         </div>
                     </div>
         
                 </div>
+                
+                <input type="hidden" name="userEmail" value = ${login.userEmail }>
 
             
                 <div class="btn-box">
                     <div class="modif-fin-btn">
-                        <button type="button" onclick="location.href=''" class="btn btn-outline-secondary px-3">수정완료</button>
+                        <button type="submit" class="btn btn-outline-secondary px-3">수정완료</button>
                     </div>
                     <div class="cencel-btn">
-                        <button type="submit" onclick="location.href='index.html'" class="btn btn-outline-secondary px-3">취소</button>
+                        <button type="button" onclick="history.back()" class="btn btn-outline-secondary px-3">취소</button>
                     </div>
                 </div>
 
@@ -272,15 +264,15 @@
     </div>
 
 
-        <!-- The sidebar -->
+                <!-- The sidebar -->
         <div class="sidebar">
             <ul>
                 <li>
                     <h3>주문 목록 </h3>
                     <ul>
                         <li><a href="#home">주문목록/배송 조회</a></li>
-                        <li><a href="#news">취소/교환 내역</a></li>
-                        <li><a href="#contact">환불 내역</a></li>
+                        <li><a href="<c:url value='/user/moveMyCanEx'/>">취소/교환 내역</a></li>
+                        <li><a href="<c:url value='/user/moveMyRe'/>">환불 내역</a></li>
                     </ul>
                     <!-- 호버 될 때 마다 active 클래스 추가 -->
                 </li>
@@ -288,10 +280,10 @@
                 <li>
                     <h3>회원정보</h3>
                     <ul>
-                        <li><a href="#home">회원정보 조회</a></li>
-                        <li><a href="#news">배송지 관리</a></li>
-                        <li><a href="#contact">비밀번호 변경</a></li>
-                        <li><a href="#contact">회원탈퇴</a></li>
+                        <li><a href="<c:url value='/user/moveMyUs'/>">회원정보 조회</a></li>
+                        <%-- <li><a href="<c:url value='/user/moveMyADDR'/>">배송지 관리</a></li> --%>
+                        <li><a href="<c:url value='/user/moveMyAu'/>">비밀번호 변경</a></li>
+                        <li><a href="<c:url value='/user/moveMyDel'/>">회원탈퇴</a></li>
                     </ul>
 
                 </li>
@@ -313,6 +305,23 @@
 
 
       </section>
+      
+      
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
 
+
+window.onload = function(){
+    document.getElementById("basic-address").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("basic-address").value = data.address; // 주소 넣기
+                document.querySelector("input[id=detail-address]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
+</script>
 
 <%@ include file="../include/FOOTER.jsp"%>

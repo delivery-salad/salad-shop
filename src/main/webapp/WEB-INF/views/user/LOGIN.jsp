@@ -93,8 +93,8 @@
                     <form action="<c:url value='/user/login'/>" method="post" id="loginForm">
                     
                       <div class="form-group first">
-                        <label>아이디</label>
-                        <input type="text" class="form-control" id="userId" name="userId">
+                        <label>이메일</label>
+                        <input type="text" class="form-control" id="userId" name="userEmail">
                       </div>
                       
                       <div class="form-group last mb-4">
@@ -104,10 +104,7 @@
                       </div>
                       
                       <div class="d-flex mb-5 align-items-center">
-                        <label class="control control--checkbox mb-0"><span class="caption">로그인 상태 유지</span>
-                          <input type="checkbox" checked="checked"/>
-                          <div class="control__indicator"></div>
-                        </label>
+                        
                         <span class="ml-auto"><a href="#" class="forgot-pass">비밀번호 찾기</a></span> 
                       </div>
         
@@ -138,7 +135,7 @@
                             <img src="${pageContext.request.contextPath }/resources/img/btnG_Naver.png" alt="Image" class="img-sns">
                         </a> 
 
-                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=RESTAPI_KEY&redirect_uri=http://localhost/salad/user/kakaoLogin&response_type=code" class="kakao">
+                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=e7765b7b41a731a6d393a87d20f121a9&redirect_uri=http://localhost/salad/user/kakaoLogin&response_type=code" class="kakao">
                         <!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요 -->
                             <img src="${pageContext.request.contextPath }/resources/img/kakao_icon.png" alt="Image" class="img-sns">
                         </a> 

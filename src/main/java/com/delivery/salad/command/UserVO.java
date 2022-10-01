@@ -4,23 +4,19 @@ package com.delivery.salad.command;
 /**
     DROP TABLE IF EXISTS `USER`;
 
-	CREATE TABLE `USER` (
-		`USERID`	VARCHAR2(50)	NOT NULL,
-		`USERNAME`	VARCHAR2(50)	NOT NULL,
-		`USERPW`	VARCHAR2(100)	NOT NULL,
-		`USERPHONE`	VARCHAR2(50)	NOT NULL,
-		`USEREMAIL`	VARCHAR2(50)	NOT NULL,
-		`USERBASICADDR`	VARCHAR2(300)	NOT NULL,
-		`USERDETAILADDR`	VARCHAR2(300)	NOT NULL
-	);
-
-	ALTER TABLE `USER` ADD CONSTRAINT `PK_USER` PRIMARY KEY (
-		`USERID`
+	CREATE TABLE USER (
+		USERNUM bigint auto_increment,
+		USERNAME	VARCHAR(50)	NOT NULL,
+		USERPW	VARCHAR(100)	NOT NULL,
+		USERPHONE	VARCHAR(50)	NOT NULL,
+		USEREMAIL	VARCHAR(50)	NOT NULL,
+		USERBASICADDR	VARCHAR(300)	NOT NULL,
+		USERDETAILADDR	VARCHAR(300)	NOT NULL,
+        constraint primary key(USERNUM)
 	);
  */
 public class UserVO { 
 	
-	public String userId;
 	public String userName;
 	public String userPw;
 	public String userPhone;
@@ -30,18 +26,14 @@ public class UserVO {
 	
 	@Override
 	public String toString() {
-		return "UserVO [userId=" + userId + ", userName=" + userName + ", userPw=" + userPw + ", userPhone=" + userPhone
+		return "UserVO [userName=" + userName + ", userPw=" + userPw + ", userPhone=" + userPhone
 				+ ", userEmail=" + userEmail + ", userBasicAddr=" + userBasicAddr + ", userDetailAddr=" + userDetailAddr
 				+ "]";
 	}
 	
 	
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+
+
 	public String getUserName() {
 		return userName;
 	}
