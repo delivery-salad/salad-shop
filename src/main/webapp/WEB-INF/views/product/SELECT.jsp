@@ -258,10 +258,40 @@
         			</tbody>
         		
         		</table>
+        		<div class="text-right">
+        			<button class="btn btn-outline-info">상품문의 전체보기</button>
+        			<button class="btn btn-outline-success" id="QnA_write">상품문의 글쓰기</button>
+        		</div>
+        		
+				        		
+        		
+        		
         		
         	</div>
          </div>
         
+        		
+        		<!-- 상품문의 글 쓰기 모달  -->
+        		<!-- Modal -->
+						<div class="modal fade" id="career_info" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        ...
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
         
         
         
@@ -385,19 +415,22 @@
         });
 
 
-
 /** 장바구니 start */
         
         /** 서버로 전송할 데이터 */
         const form = {
         		userId : '${login.userEmail}',
         		productNum : '${product.productNum}',
+        		productName : '${product.productName}',
+				productPrice : '${product.productPrice}',
+				totalPrice : '',
         		productCount: ''
         }
         
         /** 장바구니 추가 버튼 */
         $(".cart-btn").on("click", function(e){
         	form.productCount = $(".valval").val();
+        	form.totalPrice = form.productCount*form.productPrice;
         	$.ajax({
         		url:'<c:url value="/order/addCart" />',
         		type: 'POST',
@@ -430,6 +463,17 @@
         }); // 구매 버튼 끝  
         
         
+        
+        
+        //상품문의 글쓰기 모달 
+        $('#QnA_write').on('click',function(){
+            
+        	console.log('zmfflr');
+            $('#asd').modal('show');
+            
+            
+            
+        });//상품 문의 모달 종료 
         
         
         
