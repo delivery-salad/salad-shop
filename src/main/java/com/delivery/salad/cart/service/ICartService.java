@@ -20,4 +20,7 @@ public interface ICartService {
 	
 	/** 카트 확인  */
 	CartVO checkCart(CartVO cart);
+	
+	/** 주문된 카트 삭제 */
+	int deleteOrderCart(CartVO cart);
 }

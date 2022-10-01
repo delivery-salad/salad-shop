@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.delivery.salad.order.mapper.IOrderMapper">
+ 
+	 <select id="getProductInfo" resultType="com.delivery.salad.command.OrderPageProdVO">
+	 	
+	 	SELECT PRODUCTNUM, PRODUCTNAME, PRODUCTPRICE
+	 	FROM PRODUCT WHERE PRODUCTNUM = #{productNum}
+	 	
+	 </select>
+	 
+	 <!--  주문자 정보, IUserMapper에 Getinfo 추가하기  -->
+	 <select id="getUserInfo" resultType="com.delivery.salad.command.UserVO">
+	 	SELECT USERID, USERNAME, USEREMAIL, USERBASICADDR, USERDETAILADDR
+	 	FROM USER WHERE USERID = #{userId}
+	 </select>
+	 
+	 <select id="getOrderInfo" resultType="com.delivery.salad.command.OrderProdVO">
+	 	select productNum, productPrice
+		from PRODUCT where PRODUCTNUM = #{productNum}
+	 </select>
+	 
+	 <insert id="registerOrder">
+	 	insert into ORDER
+	 	(ORDERNUM, ORDERNAME, USERID, ORDEREMAIL, ORDERPHONE, ORDERADDRESS1, ORDERADDRESS2, ORDERADDRESS3, ORDERSTATE, DELIVERYCOST)
+    	values(#{orderNum}, #{orderName}, #{userId}, #{orderEmail}, #{orderPhone}, #{orderAddress1}, #{orderAddress2}, #{orderAddress3}, '배송준비', #{deliveryCost})
+	 </insert>
+	 
+	 <insert id="registerOrderProd">
+		INSERT INTO ORDERPROD
+		(ORDERNUM, PRODUCTNUM, PRODUCTCOUNT, PRODUCTPRICE)
+		VALUES(#{orderNum}, #{productNum}, #{productCount}, #{productPrice})
+	 </insert>
+	 
+	 <!-- 주문 상품 재고 차감 -->
+	 <update id="deductStock">
+	 	UPDATE PRODUCT SET PRODUCTCOUNT = #{productCount} WHERE PRODUCTNUM = #{productNum}
+	 </update>
+	 
+	 <!--  주문취소  -->
+	 <update id="orderCancle">
+	 	UPDATE ORDER SET ORDERSTATE = '주문취소' WHERE ORDERID = #{orderId}
+	 </update>
+	 
+	 <!--  주문 상품 정보 (주문 취소 ) -->
+	 <select id="getOrderProdInfo" resultType="com.delivery.salad.command.OrderProdVO">
+	 	SELECT * FROM ORDERPROD
+	 	WHERE ORDERID = #{orderId}
+	 </select>
+	 
+	 <!--  주문 정보(주문취소) -->
+	 <select id="getOrder" resultType="com.delivery.salad.command.OrderVO">
+	 	SELECT * FROM ORDER
+	 	WHERE ORDERID ={orderId}
+	 </select>
+ 
+ </mapper>
+ 
+ 
+ 

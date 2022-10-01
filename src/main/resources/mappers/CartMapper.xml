@@ -42,8 +42,8 @@
 	</update>
 	
 	<select id="getCart" resultType="com.delivery.salad.command.CartVO">
-		select cartNum, userId, productNum, productCount
-		from CART
+		select a.cartNum, a.userId, a.productNum, a.productCount, b.productName, b.productPrice
+		from CART a left outer join PRODUCT b on a.productNum = b.productNum
 		where userId = #{userId}	
 	</select>
 	
@@ -54,6 +54,11 @@
 		where USERID = #{userId} and PRODUCTNUM = #{productNum}
 	
 	</select>
+	
+	<delete id="deleteOrderCart">
+		delete from CART where USERID=#{userId} and PRODUCTNUM =#{productNum}
+	
+	</delete>
 	
 	
 

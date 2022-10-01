@@ -1,5 +1,9 @@
 package com.deliver.salad.cart;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +32,8 @@ public class CartMapperTest {
 //		mapper.addCart(cart);
 		
 		
-		String userId = "test123";
-		int productNum = 123;
+		String userId = "id123";
+		int productNum = 20;
 		int productCount = 2;
 		
 		CartVO cart = new CartVO();
@@ -37,9 +41,10 @@ public class CartMapperTest {
 		cart.setProductNum(productNum);
 		cart.setProductCount(productCount);
 		
-		int result = 2;
-		result = mapper.addCart(cart);
+		//조건 
+		int result = mapper.addCart(cart);
 		
+		//결과 
 		System.out.println("결과 : " + result);
 		
 		
@@ -67,12 +72,18 @@ public class CartMapperTest {
 		
 	}
 	
-//	@Test
-//	public void getCartTest() {
-//		String userId = "id123";
-//		CartVO cart = mapper.getCart(userId);
-//
-//		System.out.println(userId + "님의 카트: " + cart.get);
-//		}
+	@Test
+	public void getCartTest() {
+		String userId = "test123";
+		
+		List<CartVO> list = mapper.getCart(userId);
+		for(CartVO cart : list) {
+			System.out.println(cart);
+			cart.initTotal();
+			System.out.println("init cart : " + cart);
+		}
+		
+
+		}
 
 }

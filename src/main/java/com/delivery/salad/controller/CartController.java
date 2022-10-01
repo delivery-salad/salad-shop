@@ -4,7 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,9 +28,18 @@ public class CartController {
 
 	@GetMapping("/order/cart")
 	public String moveCart() {
-		System.out.println("order/cart : GET");
-		return "order/CART";
+		
+		return "/order/CART";
 	}
+	
+//	@GetMapping("/order/cart/{userId}")
+//	public String moveCart(@PathVariable("userId") String userId, Model model) {
+//		
+//		model.addAttribute("장바구니 정보: ", service.getCart(userId));
+//		
+//		System.out.println("order/cart : GET");
+//		return "/order/CART";
+//	}
 	
 	@PostMapping("/order/addCart")
 	@ResponseBody
@@ -39,7 +50,7 @@ public class CartController {
 		HttpSession session = request.getSession();
 		UserVO vo = (UserVO)session.getAttribute("user");
 		if(vo == null){
-			return "4";
+			return "3";
 		}
 		 */
 		
@@ -51,10 +62,24 @@ public class CartController {
 		
 	}
 	
-	@GetMapping("/order/orderCheck")
-	public String moveCheck() {
-		System.out.println("order/orderCheck : GET");
-		return "order/ORDERCHECK";
+	/** 장바구니 수량 수정 */
+	@PostMapping("/order/updateCart")
+	public String updateCart(CartVO cart) {
+		service.updateCart(cart);
+		
+		//User 연결 후 사용 
+//		return "redirect:/order/cart/" + cart.getUserId();
+		return "redirect:/order/cart";
 	}
+	
+	/** 장바구니 수량 수정 (삭제)*/
+	@PostMapping("/order/deleteCart")
+	public String deleteCart(CartVO cart) {
+		service.deleteCart(cart.getCartNum());
+		
+		return "redirect:/order/cart/" + cart.getUserId();
+	}
+	
+
 	
 }

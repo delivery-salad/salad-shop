@@ -17,9 +17,9 @@ public class CartService implements ICartMapper {
 	@Override
 	public int addCart(CartVO cart) {
 		/** 장바구니 체크 */
-		CartVO vo = mapper.checkCart(cart);
+		CartVO checkCart = mapper.checkCart(cart);
 
-		if (vo != null) {
+		if (checkCart != null) {
 			return 2;
 		}
 		/** 장바구니 등록, 에러의 경우 0 리턴 */
@@ -42,12 +42,23 @@ public class CartService implements ICartMapper {
 
 	@Override
 	public List<CartVO> getCart(String userId){
-		return mapper.getCart(userId);
+		
+		List<CartVO> cart = mapper.getCart(userId);
+		
+		for(CartVO vo : cart) {
+			vo.initTotal();
+		}
+		return cart;
 	}
 	
 	@Override
 	public CartVO checkCart(CartVO cart) {
 		return mapper.checkCart(cart);
+	}
+	
+	@Override 
+	public int deleteOrderCart(CartVO cart) {
+		return mapper.deleteOrderCart(cart);
 	}
 
 }

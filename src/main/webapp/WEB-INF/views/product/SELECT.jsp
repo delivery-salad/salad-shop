@@ -105,7 +105,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
                         <h3 name="productName">${product.productName}</h3>
-              
+              			<input type="hidden" name="productNum" value="${product.productNum}">
               
                         <div class="product__details__price"><fmt:formatNumber pattern="###,###,###" value="${product.productPrice}" /> 원</div>
                         <p>${product.productContent}</p>
@@ -118,12 +118,12 @@
 								</div>
 							</div>
 						</div>
-                        <a href="#" class="primary-btn cart-btn">ADD TO CARD</a>
+                        <a href="/order/cart/${user.userId} " class="primary-btn cart-btn">ADD TO CART</a>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
               			
               			  <div class="text-left product_count" style="margin-top: 30px;">
                                 <button type="button" class="btn btn-secondary" style="width: 200px;">장바구니</button>
-                                <button type="button" class="btn btn-success" style="width: 200px;">구매</button>
+                                <button type="button" class="btn btn-success buy-btn" style="width: 200px;">구매</button>
                             </div>
                     </div>
                 </div>
@@ -333,6 +333,13 @@
 </div>  <!-- row 종료 -->
 </div>  <!-- container 종료 -->
 
+<!--  주문 form  -->
+<form action="/order/orderCheck/${user.userId}" method="get" class="order-form">
+	<input type="hidden" name="orders[0].productNum" value="${productInfo.productNum}">
+	<input type="hidden" name="orders[0].productCount" value="">
+
+</form>
+
     </section>
 
 
@@ -374,7 +381,42 @@
 
 
 
+        /** 장바구니 start */
         
+        /** 서버로 전송할 데이터 */
+        const form = {
+        		userId : '${user.userId}',
+        		productNum : '${product.productNum}',
+        		productCount: ''
+        }
+        
+        /** 장바구니 추가 버튼 */
+        $(".cart-btn").on("click", function(e){
+        	form.productCount = $(".valval").val();
+        	$.ajax({
+        		url:'/order/addCart',
+        		type: 'POST',
+        		data: form,
+        		success:function(result){
+      				if(result == '0'){
+      					alert("장바구니에 추가하지 못하였습니다.");
+      				} else if(result == '1'){
+      					alert("장바구니에 추가되었습니다.");
+      				} else if(result == '2'){
+      					alert("장바구니에 이미 추가되어 있습니다.");
+      				} else if(result == '3'){
+      					alert("로그인이 필요합니다.");
+      				}
+        		}
+        	})
+        }); //장바구니 끝 
+        
+        /** 바로 구매 버튼  */
+        $(".buy-btn").on("click", function(){
+        	let productCount = $(".valval").val();
+        	$(".order-form").find("input[name='orders[0].productCount']").val(productCount);
+        	$(".order-form").submit();
+        }); // 구매 버튼 끝  
         
         
         

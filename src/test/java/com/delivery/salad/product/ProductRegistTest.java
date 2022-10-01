@@ -13,7 +13,7 @@ import com.delivery.salad.product.mapper.IProductMapper;
 import com.delivery.salad.product.service.IProductService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring//root-context.xml")
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class ProductRegistTest {
 	
 	@Autowired
@@ -23,7 +23,7 @@ public class ProductRegistTest {
 	@Test
 	public void productRegistTest() {
 		ProductVO vo= new ProductVO();
-		for(int i=1;i<=270;i++) {
+		for(int i=1;i<=20;i++) {
 			vo.setProductPrice(10000+i);
 			vo.setProductCount(1000+i);
 			vo.setProductName(i+"번째 상품 이름");
