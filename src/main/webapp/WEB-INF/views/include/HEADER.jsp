@@ -79,6 +79,11 @@
 							</div>
 							<div class="header__top__right__auth">
 								<a href="<c:url value='/user/moveLogin'/>"><i class="fa fa-user"></i> Login</a>
+								
+							</div>
+							<div class="header__top__right__auth">
+								<a href="<c:url value='/user/regist'/>"><i class="fa fa-user"></i> Regist</a>
+								
 							</div>
 
 							<div class="header__cart">

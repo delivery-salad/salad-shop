@@ -93,11 +93,11 @@
             <div class="row">
         
         
-         <div class="col-lg-6 col-md-6">
+             <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                         
-                            <img class="product__details__pic__item--large"  src="<c:url value='/resources/img/salad.svg'/> " alt="" style="margin-top: -100px">
+                            <img class="product__details__pic__item--large"  src="<c:url value='/product/productImgGet/fileName=${product.productImgName}'/> " alt="" name="productImgName" height="568" width="570" >
                         </div>
                
                     </div>

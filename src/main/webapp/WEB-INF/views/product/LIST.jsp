@@ -16,8 +16,9 @@
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="product__item text-center">
 						<a
-							href="<c:url value='/product/productSelect/productNum=${product.productNum}' />">
-							<img alt="xx" src="<c:url value='/resources/img/logo.png'/> ">
+							href="<c:url value='/product/productSelect/productNum=${product.productNum}&fileName=${product.productImgName}' />">
+							<img alt="" src="<c:url value ='/product/productImgGet/fileName=${product.productImgName}' /> " name="productImgName">
+							
 						</a>
 						<div class="product__item__text">
 							<h6>
@@ -32,9 +33,10 @@
 						</div>
 					</div>
 				</div>
+
 			</c:forEach>
 
-	
+
 
 		
 
@@ -177,7 +179,12 @@
 			console.log(value);
 	 		document.pageForm.pageNum.value = value;
 			document.pageForm.submit(); 
+
 		});
 		
 	})
+	
+		let ss='C:\\test\\upload\\31a0d497.jpg';
+		console.log(ss.substring(0,ss.lastIndexOf("\\")));
+		console.log('zzzzzzzzzz');
 </script>
