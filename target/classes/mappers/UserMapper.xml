@@ -28,7 +28,6 @@
 	
 	
 	  <resultMap type="com.delivery.salad.command.UserVO" id="UserMap">
-	  	<id property = "userId" column="USERID"/>
 	  	
 	  	<result property="userName" column="USERNAME"/>
 	  	<result property="userPw" column="USERPW"/>
@@ -48,16 +47,85 @@
 	
 	
 	<insert id="join">
-		INSERT INTO USER (USERID, USERNAME, USERPW, USERPHONE, USEREMAIL, USERBASICADDR, USERDETAILADDR) 
-		VALUES(#{userId}, #{userName}, #{userPw}, #{userPhone}, #{userEmail}, #{userBasicAddr} ,#{userDetailAddr} )
+		INSERT INTO USER ( USERNAME, USERPW, USERPHONE, USEREMAIL, USERBASICADDR, USERDETAILADDR) 
+		VALUES( #{userName}, #{userPw}, #{userPhone}, #{userEmail}, #{userBasicAddr} ,#{userDetailAddr} )
 	</insert>
 	
 	
 	<select id ="login" resultMap = "UserMap">
 		SELECT * FROM USER 
-		WHERE USERID = #{userId} and USERPW = #{userPw} 
+		WHERE userEmail = #{userEmail} and USERPW = #{userPw} 
 	
 	</select>
+	
+	<update id="modify">
+		update USER set USERPHONE = #{userPhone}, USERBASICADDR = #{userBasicAddr}, USERDETAILADDR = #{userDetailAddr}
+		where USEREMAIL = #{userEmail}
+	</update>
+	
+	<update id="ChPw">
+		update USER set USERPW = #{userPw}
+		where USEREMAIL = #{userEmail}
+	</update>
+	
+	<delete id="delete">
+		delete from USER 
+		where USEREMAIL = #{userEmail} and USERPW = #{userPw}
+	</delete>
+	
+	<update id="updateKakaoAddr">
+		update kakao_table set USEREMAIL = #{userEmail}, USERPHONE = #{userPhone}, USERBASICADDR = #{userBasicAddr}, USERDETAILADDR = #{userDetailAddr}
+		where KEMAIL = #{userEmail}
+	</update>
+	
+	<select id ="searchKakao" resultMap = "UserMap">
+		select * from kakao_table 
+		where USERPHONE = #{userPhone}
+	
+	</select>
+	
+	<update id="updateNaverAddr">
+		update naver_table set USEREMAIL = #{userEmail}, USERPHONE = #{userPhone}, USERBASICADDR = #{userBasicAddr}, USERDETAILADDR = #{userDetailAddr}
+		where NEMAIL = #{userEmail}
+	</update>
+	
+	<select id ="searchNaver" resultMap = "UserMap">
+		select * from naver_table 
+		where USERPHONE = #{userPhone}
+	
+	</select>
+	
+	
+	<resultMap type="com.delivery.salad.command.KakaoUser" id="kakao">
+	
+	  	<id property = "kNum" column="KNUMBER"/>
+	  	
+	  	<result property="userName" column="KNAME"/>
+	  	<result property="userEmail" column="KEMAIL"/>
+
+
+	</resultMap> 
+	
+	
+	
+	<select id="findkakao" resultType="int">
+		select count(*) from kakao_table where KNAME=#{userName} and KEMAIL=#{userEmail}
+	</select>
+
+	<insert id="kakaoinsert" >
+		insert into kakao_table(KNAME, KEMAIL)
+			values(#{userName}, #{userEmail})
+	</insert>
+	
+	<select id="findnaver" resultType="int">
+		select count(*) from naver_table where NNAME=#{userName} and NEMAIL=#{userEmail}
+	</select>
+
+	<insert id="naverinsert" >
+		insert into naver_table(NNAME, NEMAIL, NPHONE)
+			values(#{userName}, #{userEmail}, #{nPhone})
+	</insert>
+	
 	
 	
 	<!-- <select id ="login" resultMap="UserMap">

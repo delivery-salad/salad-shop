@@ -13,6 +13,10 @@
 	<result property="productContent" column="PRODUCTCONTENT" />
 	<result property="productRegistDate" column="PROUDCTREGISTDATE" />
 	<result property="productUpdateDate" column="PRODUCTUPDATEDATE" />
+	<result property="productImgUrl" column="PRODUCTIMGURL" />
+	<result property="productImgName" column="PRODUCTIMGNAME" />
+	<result property="productContentImgUrl" column="PRODUCTCONTENTIMGURL" />
+	<result property="productContentImgName" column="PRODUCTCONTENTIMGNAME" />
 	
 
 

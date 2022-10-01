@@ -140,6 +140,7 @@
                 
          <div class="col-lg-12" style="margin-top:100px " id="detail">
         	<h1>상품의 상세 이미지가 들어갈 공간 </h1>
+         	<img alt="" src="<c:url value='/product/productImgGet/fileName=${product.productContentImgName}' />">
          
          </div>       
                 
