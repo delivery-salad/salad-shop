@@ -5,62 +5,87 @@
 <%@ include file="../include/HEADER.jsp"%>
 
 <style>
+input[type="file"]{
+ position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+label{
+ 	display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #999999;
+    cursor: pointer;
+    height: 40px;
+    width:100px;
+    margin-left: 10px;
 
-
-
+}
 
 </style>
 
 
 
-    <section class="product-details spad">
-        <div class="container">
-            <div class="row">
+<section class="product-details spad">
+	<div class="container">
+		<div class="row">
 
-				<div class="col-sm6 col-md-6 col-lg-6 col-xl-6">
-				<form action="<c:url value='/product/productRegist' />" method="post" enctype="multipart/form-data" >
+			<div class="col-sm6 col-md-6 col-lg-6 col-xl-6">
+				<form action="<c:url value='/product/productRegist' />"
+					method="post" enctype="multipart/form-data">
 
 					<table>
-                           <tbody>
-                                <tr>
-                                    <td>상품 이름　　</td>
-                                    <td><input class="form-control" type="text" name="productName" placeholder="이름"></td>
-                                </tr>
-                                <tr>
-                                    <td>상품 가격</td>
-                                    <td><input class="form-control"  type="text" name="productPrice" placeholder="가격"></td>
-                                </tr>
-                                <tr>
-                                    <td>상품 개수</td>
-                                    <td><input class="form-control"  type="text" name="productCount" placeholder="개수">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>상품 썸네일</td>
-                                    <td>
-                                    <input class="form-control"  type="file" name="file_url" id="file_url"  placeholder="내용" accept=".jpg,.png,,.pdf">
-                                    	
-                                    	<img  id="pre" alt="이미지 업로드에 실패하였습니다" class="form-control">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>상품 상세 이미지</td>
-                                    <td><input class="form-control"  type="file" name="file_content" id="file_content"  placeholder="내용"  accept=".jpg ,.png ,,.pdf">
-                                    	<img  id="pre_content" alt="이미지 업로드에 실패하였습니다">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <div class="text-center ">
-                            <button type="submit" class="btn btn-outline-secondary">등록</button>
-                        </div>
+						<tbody>
+							<tr>
+								<td>상품 이름</td>
+								<td><input class="form-control" type="text"
+									name="productName" placeholder="이름"></td>
+							</tr>
+							<tr>
+								<td>상품 가격</td>
+								<td><input class="form-control" type="text"
+									name="productPrice" placeholder="가격"></td>
+							</tr>
+							<tr>
+								<td>상품 개수</td>
+								<td><input class="form-control" type="text"
+									name="productCount" placeholder="개수"></td>
+							</tr>
+
+							<tr>
+								<td>상품 썸네일</td>
+								<td><input type="text" readonly="readonly" id="file_nam">
+									<label for="file_url">업로드</label> <input class="form-control"
+									type="file" name="file_url" id="file_url"
+									value="${product.productImgName }"> <img id="pre">
+								</td>
+							</tr>
+							<tr>
+								<td>상품 상세 이미지</td>
+								<td><input type="text" readonly="readonly" id="file_nam2">
+									<label for="file_content">업로드</label> <input
+									class="form-control" type="file" name="file_content"
+									id="file_content"> <img id="pre_content"></td>
+							</tr>
+
+
+
+						</tbody>
+					</table>
+
+					<div class="text-center ">
+						<button type="submit" class="btn btn-outline-secondary">등록</button>
+					</div>
 
 				</form>
-				</div>
 			</div>
-
 		</div>
+
+	</div>
 </section>
 
 
@@ -178,12 +203,17 @@ $(function(){
 	$("#file_url").change(function() {
 		upload();
 	    readURL(this); //this는 #file자신 태그를 의미
+	    var s=$('#file_url').val();
+	    
+	    $('#file_nam').val(s.substring(s.lastIndexOf('\\')+1));
 	    
 	});
 	
 	$("#file_content").change(function() {
 		upload2();
 	    readURL2(this); //this는 #file자신 태그를 의미
+	    var s2=$('#file_content').val();
+	    $('#file_nam2').val(s2.substring(s2.lastIndexOf('\\')+1));
 	    
 	});
 	//자바 스크립트 파일 미리보기 기능
