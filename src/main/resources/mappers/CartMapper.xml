@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.delivery.salad.cart.mapper.ICartMapper">
+  
+  <resultMap type="com.delivery.salad.command.CartVO" id="CartMap">
+	
+	  	<id property = "cartNum" column="CARTNUM"/>
+	  	
+	  	<result property="userEmail" column="USEREMAIL"/>
+	  	<result property="productNum" column="PRODUCTNUM"/>
+	  	<result property="productName" column="PRODUCTNAME"/>
+	  	<result property="productPrice" column="PRODUCTPRICE"/>
+	  	<result property="productCount" column="PRODUCTCOUNT"/>
+	  	<result property="totalPrice" column="TOTALPRICE"/>
+
+	</resultMap> 
+	
+	<insert id="addCart" >
+		INSERT INTO CART
+		(USEREMAIL, PRODUCTNUM, PRODUCTNAME, PRODUCTPRICE, PRODUCTCOUNT, TOTALPRICE)
+		VALUES(#{userEmail}, #{productNum}, #{productName}, #{productPrice}, #{productCount}, #{totalPrice})
+	</insert>
+	
+	<delete id="deleteCart">
+		delete from CART where CARTNUM = #{cartNum}
+	</delete>
+	
+	<update id="updateCart">
+		update CART set PRODUCTCOUNT = #{productCount} where CARTNUM = #{cartNum}
+	</update>
+	
+	<select id="getCart" resultType="com.delivery.salad.command.CartVO">
+		select a.cartNum, a.userEmail, a.productNum, a.productCount, b.productName, b.productPrice
+		from CART a left outer join PRODUCT b on a.productNum = b.productNum
+		where USEREMAIL = #{userEmail}	
+	</select>
+	
+	<!-- 카트 확인 -->
+	<select id="checkCart" resultType="int">
+	
+		select COUNT(*) from CART 
+		where USEREMAIL = #{userEmail} and PRODUCTNUM = #{productNum}
+	
+	</select>
+	
+	<delete id="deleteOrderCart">
+		delete from CART where USEREMAIL=#{userEmail} and PRODUCTNUM =#{productNum}
+	
+	</delete>
+	
+  
+  </mapper>

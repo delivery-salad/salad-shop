@@ -163,7 +163,7 @@
 					<div class="admin_msg"><p><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">배송 비용 : 3,000원 (결제금액 50,000원 이상 무료)&nbsp;</span><br style="font-family: 돋움, dotum; font-size: 13.3333px;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">배송 기간 : 1~2일 (제주도, 도서산간 2~3일)</span><br style="font-family: 돋움, dotum; font-size: 13.3333px;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">배송 안내 :&nbsp;</span></p><p><font face="나눔바른고딕, NanumBarunGothic"><span style="font-size: 14.6667px;">- 결제완료 후 배송까지 2~3일 소요되며, 출고당일 오전 제작안내 알림톡 발송</span></font>&nbsp;</p><p><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt; color: rgb(255, 0, 0);">- 주문량이 많은 월~화, 연휴/명절 다음 날 출고의 경우 </span><span style="font-size: 14.6667px; font-family: 나눔바른고딕, NanumBarunGothic; color: rgb(255, 0, 0);">배송 지연이 발생할 수 있습니다.</span><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt; color: rgb(255, 0, 0);">&nbsp;</span></p><p><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">-&nbsp;</span><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">제주 및 도서 산간지역은 운임 3,000원이 추가 됩니다.</span><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">&nbsp;</span>&nbsp;&nbsp;</p><p><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 14.6667px;">-&nbsp;</span><span style="background-color: rgb(255, 255, 255); color: rgb(36, 36, 36); font-family: &quot;Segoe UI&quot;, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 14px;">정기배송 홀딩기간은 주문일로부터 최대 3개월까지 입니다.</span></p><p><span style="font-size: 14.6667px; font-family: 나눔바른고딕, NanumBarunGothic;">- 신선 식품 배송으로 월요일 및 공휴일 다음날은 배송이 불가합니다.&nbsp;</span></p><p><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">- 롯데 택배로 배송되며, 상품 출고 후 송장번호가 문자로 발송됩니다. [오후 5시 이후]&nbsp;</span>&nbsp;</p><p><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">- 스티로폼 박스에 아이스팩과 함께 포장하여 배송됩니다. (단, 겨울철에는 아이스팩을 제외하고 배송됩니다)</span>&nbsp;</p><p style="font-family: 돋움, dotum; font-size: 13.3333px; line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">- 고객님께서 주문하신 상품은 발송되는 날, 당일 제작하여 배송됩니다.&nbsp;</span></p></div>
 					<h3  class="dtit m_t50">교환 및 반품안내</h3>
 					<div class="admin_msg">
-						<p><font face="나눔바른고딕" size="3"><span style="font-size: 11pt;">- 제품의 하자나 판매자의 실수로 인한 경우 100% 교환/반품/환불이 가능합니다.</span><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">&nbsp;</span></font></p><p style="line-height: 1.8;"><span style="font-size: 10pt;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">-&nbsp;<span style="font-size: 11pt;">식품 특성상 고객님의 단순변심으로 인한 상품 교환 및 반품은 불가하며, 상품 수령 후 임의 반품 및 환불 역시 불가합니다.&nbsp;</span>&nbsp;</span></span></p><p style="line-height: 1.8;"><span style="font-size: 10pt;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">- 정기배송 상품의 경우 첫 배송 수령 후, 구성품 변경이 가능하며 그 전에는 취소 후 재주문하시면 됩니다.&nbsp;</span></span></p><p style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">​-&nbsp;<span style="font-size: 11pt;">제품 문제 발생 시에는 수령 후 6일 이내 고객센터나 문의하기 게시판으로 접수 부탁드립니다.</span></span></p><div style="line-height: 1.8; font-family: &quot;Segoe UI&quot;, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 14px; box-sizing: border-box;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">&nbsp; (식품 배송 특성상 유선 상으로 제품 확인이 어려워 사진 촬영본 확인 후 검토하여 환불 또는 재발송으로 진행됩니다)</span></div><p style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">- 제품에 하자가 있는 경우, 제품 배송 즉시 판매자에게 사전 전화통화를 해야 하며 판매자 승인없이 임의 반품하는 경우 반품/교환이 제한될 수 있습니다.</span><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">&nbsp;</span></p><p><font face="나눔바른고딕" size="3"><span style="font-family: 돋움, dotum; font-size: 10pt;"></span><span style="font-family: 돋움, dotum; font-size: 10pt;"><span style="font-size: 10pt;"></span></span></font></p><p style="margin: 0px; padding: 0px; line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">- 상품 수령후 보관상 발생한 변질, 파손에 대해서는 반품/교환이 제한될 수 있습니다.</span></p>
+						<p><font face="나눔바른고딕" size="3"><span style="font-size: 11pt;">- 제품의 하자나 판매자의 실수로 인한 경우 100% 교환/반품/환불이 가능합니다.</span><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">&nbsp;</span></font></p><p style="line-height: 1.8;"><span style="font-size: 10pt;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">-&nbsp;<span style="font-size: 11pt;">식품 특성상 고객님의 단순변심으로 인한 상품 교환 및 반품은 불가하며, 상품 수령 후 임의 반품 및 환불 역시 불가합니다.&nbsp;</span>&nbsp;</span></span></p><p style="line-height: 1.8;"><span style="font-size: 10pt;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">- 정기배송 상품의 경우 첫 배송 수령 후, 구성품 변경이 가능하며 그 전에는 취소 후 재주문하시면 됩니다.&nbsp;</span></span></p><p style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">-&nbsp;<span style="font-size: 11pt;">제품 문제 발생 시에는 수령 후 6일 이내 고객센터나 문의하기 게시판으로 접수 부탁드립니다.</span></span></p><div style="line-height: 1.8; font-family: &quot;Segoe UI&quot;, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 14px; box-sizing: border-box;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">&nbsp; (식품 배송 특성상 유선 상으로 제품 확인이 어려워 사진 촬영본 확인 후 검토하여 환불 또는 재발송으로 진행됩니다)</span></div><p style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">- 제품에 하자가 있는 경우, 제품 배송 즉시 판매자에게 사전 전화통화를 해야 하며 판매자 승인없이 임의 반품하는 경우 반품/교환이 제한될 수 있습니다.</span><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">&nbsp;</span></p><p><font face="나눔바른고딕" size="3"><span style="font-family: 돋움, dotum; font-size: 10pt;"></span><span style="font-family: 돋움, dotum; font-size: 10pt;"><span style="font-size: 10pt;"></span></span></font></p><p style="margin: 0px; padding: 0px; line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic; font-size: 11pt;">- 상품 수령후 보관상 발생한 변질, 파손에 대해서는 반품/교환이 제한될 수 있습니다.</span></p>
 					
                                 </div>
                             </div>
@@ -369,9 +369,9 @@
 </div>  <!-- container 종료 -->
 
 <!--  주문 form  -->
-<form action="/order/orderCheck/${user.userId}" method="get" class="order-form">
-	<input type="hidden" name="orders[0].productNum" value="${productInfo.productNum}">
-	<input type="hidden" name="orders[0].productCount" value="">
+<form action="<c:url value='/order/orderCheck/${login.userEmail}' />" method="get" class="order-form">
+	<input type="hidden" class="orderForm-productNum" name="productNum" value="${product.productNum}">
+	<input type="hidden" class="orderForm-productCount" id="pCount" name="orderCount" value="">
 
 </form>
 
@@ -419,7 +419,7 @@
         
         /** 서버로 전송할 데이터 */
         const form = {
-        		userId : '${login.userEmail}',
+        		userEmail : '${login.userEmail}',
         		productNum : '${product.productNum}',
         		productName : '${product.productName}',
 				productPrice : '${product.productPrice}',
@@ -455,10 +455,13 @@
         	})
         }); //장바구니 끝 
         
+        
         /** 바로 구매 버튼  */
         $(".buy-btn").on("click", function(){
         	let productCount = $(".valval").val();
-        	$(".order-form").find("input[name='orders[0].productCount']").val(productCount);
+        	$("#pCount").val($(".valval").val());
+        	$(".order-form").find("#pCount").val(productCount);
+        	console.log(productCount);
         	$(".order-form").submit();
         }); // 구매 버튼 끝  
         
@@ -481,5 +484,3 @@
         
     }); //jquery종료 
 </script>
-
-

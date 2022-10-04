@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.delivery.salad.orders.mapper.IOrdersMapper">
+	<!-- namespace는 어떤 interface를 참조하는지 지정  -->
+	
+
+	
+	  <resultMap type="com.delivery.salad.command.UserVO" id="UserMap">
+	  	
+	  	<result property="userName" column="USERNAME"/>
+	  	<result property="userPw" column="USERPW"/>
+	  	<result property="userPhone" column="USERPHONE"/>
+	  	<result property="userEmail" column="USEREMAIL"/>
+	  	<result property="userBasicAddr" column="USERBASICADDR"/>
+	  	<result property="userDetailAddr" column="USERDETAILADDR"/>
+
+	  </resultMap>
+
+
+	<insert id="registOrder">
+		INSERT INTO ORDERS(USEREMAIL,ORDEREMAIL,ORDERNAME,ORDERPHONE,ORDERADDRESS1,ORDERADDRESS2,ORDERADDRESS3,ORDERSTATE,DELIVERYCOST,PRODUCTNUM,ORDERCOUNT,PRODUCTNAME,PRODUCTPRICE,TOTALPRICE,DELIVERYCOMMENT)
+		VALUES(#{userEmail},#{orderEmail},#{orderName},#{orderPhone},#{orderAddress1},#{orderAddress2},#{orderAddress3},'주문완료',#{deliveryCost},#{productNum},#{orderCount},#{productName},#{productPrice},#{totalPrice},#{deliveryComment})
+	</insert>
+	
+<!-- 	<insert id="registProd">
+		INSERT INTO ORDERPROD ( PRODUCTNUM, PRODUCTCOUNT, PRODUCTNAME, PRODUCTPRICE, TOTALPRICE) 
+		VALUES( #{productNum}, #{productCount}, #{productName}, #{productPrice}, #{totalPrice})
+	</insert> -->
+	
+
+</mapper>
