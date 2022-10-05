@@ -53,5 +53,10 @@ public class OrdersService implements IOrdersService {
 
 		
 	}
+	
+	@Override
+	public List<OrdersVO> getAllOrders(String userEmail) {
+		return mapper.getAllOrders(userEmail);
+	}
 
 }

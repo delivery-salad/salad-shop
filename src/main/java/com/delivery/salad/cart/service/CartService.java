@@ -37,14 +37,9 @@ public class CartService implements ICartService {
 	
 	/** 카트 목록 */
 	@Override
-	public List<CartVO> getCart(String userEmail){
+	public CartVO getCart(String userEmail){
 		
-		List<CartVO> cart = mapper.getCart(userEmail);
-		
-		for(CartVO vo : cart) {
-			vo.initTotal();
-		}
-		return cart;
+	return mapper.getCart(userEmail);
 	}
 	
 	/** 카트 확인  */
