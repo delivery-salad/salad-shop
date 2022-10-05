@@ -95,9 +95,9 @@
 
 	<!-- Checkout Section Begin -->
 	<section class="checkout spad">
-	<form class="order-form" name="orderForm" action="<c:url value='/order/Order'/>" method="post" >
+	<form class="order-form" name="orderForm" action="<c:url value='/order/Order2'/>" method="post" >
 		<div class="container">
-
+		<input type="hidden" value="${cart.cartNum}" name="cartNum" readonly>
 			<div class="checkout__form">
 				<h4>주문내역</h4>
 				<form action="#">
@@ -108,7 +108,7 @@
 								<input type="hidden" value="${login.userEmail}" name="userEmail" readonly>
 							</div>
 							<div class="checkout__input">
-								<p>
+								<p >
 									이름<span>*</span>
 								</p>
 								<input type="text" id="orderName" name="orderName" value="">
@@ -254,17 +254,17 @@
 								<ul class="product-list-price">
 								
 										<div class="product-price-list">
-										<input type="hidden" class="individual-productNum-input" name="productNum" value="${orderList.productNum} ">
-										<input type="hidden" class="individual-productName-input" name="productName" value="${orderList.productName} ">
-										<input type="hidden" class="individual-productCount-span" name="orderCount" value="${orderCount}"/>
-										<input type="hidden" class="individual-productPrice-span" name="ProductPrice" value="${orderList.productPrice}"/>
+										<input type="hidden" class="individual-productNum-input" name="productNum" value="${cart.productNum} ">
+										<input type="hidden" class="individual-productName-input" name="productName" value="${cart.productName} ">
+										<input type="hidden" class="individual-productCount-span" name="orderCount" value="${cart.productCount}"/>
+										<input type="hidden" class="individual-productPrice-span" name="ProductPrice" value="${cart.productPrice}"/>
 										<input type="hidden" name="deliveryCost" value="3000"/>
-										<input type="hidden"  name="totalPrice" value="${orderCount*orderList.productPrice+3000}"/>
+										<input type="hidden"  name="totalPrice" value="${cart.productCount*cart.productPrice+3000}"/>
 										
 										
-											<li class="individual-productName-input" name="productName" value="">${orderList.productName} <span>원</span>
-											<span class="individual-productPrice-span">${orderCount*orderList.productPrice}</span>
-											<span  class="individual-productCount-span" name="orderCount" value="">${orderCount} &emsp;&emsp;</span>
+											<li class="individual-productName-input" name="productName" value="">${cart.productName} <span>원</span>
+											<span class="individual-productPrice-span">${cart.productPrice}</span>
+											<span  class="individual-productCount-span" name="orderCount" value="">${cart.productCount} &emsp;&emsp;</span>
 											</li>
 												
 												<input type="hidden" class="individual-totalPrice-input" value="">
@@ -275,18 +275,19 @@
 								<!--  최종 금액  -->
 								<div
 									class="checkout__order__products add_border total-info-price-div">
-									총 상품 금액 <span class="total-price-span">${orderCount*orderList.productPrice}</span>
+									총 상품 금액 <span class="total-price-span">${cart.productCount*cart.productPrice}</span>
 								</div>
 								<div class="checkout__order__products">
 									배송비 <span class="delivery-cost-span" name="deliveryCost" value="">3000</span>
 								</div>
 								<div class="checkout__order__total add_border">
-									총 결제금액 ₩<span class="final-total-price-span" name="totalPrice" value="">${orderCount*orderList.productPrice+3000}</span>
+									총 결제금액 ₩<span class="final-total-price-span" name="totalPrice" value="">${cart.productCount*cart.productPrice+3000}</span>
 								</div>
 								<div class="checkout__input__checkbox">
 									<label for="acc-or"> 위 주문 내용을 확인 하였으며, 회원 본인은 개인정보 이용 및
-										제공(해외직구의 경우 국외제공) 및 결제에 동의합니다. <input type="checkbox"
-										id="acc-or"> <span class="checkmark"></span>
+										제공(해외직구의 경우 국외제공) 및 결제에 동의합니다. 
+										<input type="checkbox" id="acc-or" name="agree"> 
+										<span class="checkmark" id="check-span"></span>
 									</label>
 								</div>
 
@@ -461,8 +462,18 @@ function searchAddress() {
     
 	/**결제 버튼 */
 	$('.order-btn').on("click", function(){
-		alert("주문되었습니다.");
-		$(".order-form").submit();
+		
+		if($())
+		
+		if($("#acc-or").is(":checked")){
+			alert("주문되었습니다.");
+			$(".order-form").submit();
+		}else {
+			alert('동의해주세요!');
+			return "/order/ORDERCHECK2";
+		
+		}
+		
 		
 	}) //결제끝 
 

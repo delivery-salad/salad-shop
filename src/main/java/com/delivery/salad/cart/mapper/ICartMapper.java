@@ -18,7 +18,7 @@ public interface ICartMapper {
 	int updateCart(CartVO cart);
 	
 	/** 카트 목록 */
-	List<CartVO> getCart(String userEmail);
+	CartVO getCart(String userEmail);
 	
 	/** 카트 확인  */
 	int checkCart(CartVO cart);

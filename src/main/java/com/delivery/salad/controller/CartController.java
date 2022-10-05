@@ -34,7 +34,9 @@ public class CartController {
 	public String moveCart(@PathVariable String userEmail, Model model, UserVO user) {
 		
 		
-		model.addAttribute("cartInfo", service.getCart(userEmail));
+		model.addAttribute("ci", service.getCart(userEmail));
+//		CartVO cart = service.getCart(userEmail);
+		System.out.println(service.getCart(userEmail));
 		System.out.println(userEmail);
 		
 		System.out.println("order/cart : GET");
@@ -78,8 +80,8 @@ public class CartController {
 	}
 	
 	/** 장바구니 수량 수정 */
-	@PostMapping("/order/updateCart")
-	public String updateCart(CartVO cart) {
+	@PostMapping("/order/updateCart/{userEmail}")
+	public String updateCart(CartVO cart,@PathVariable String userEmail) {
 	
 		System.out.println("장바구니 수정 컨트롤러 들어옴");
 		
@@ -87,8 +89,8 @@ public class CartController {
 		
 		System.out.println(cart);
 		
-		//User 연결 후 사용 
-		return "redirect:/order/cart/" + cart.getUserEmail();
+	
+		return "redirect:/order/cart/{userEmail}";
 	}
 	
 	@PostMapping("/order/deleteCart/{userEmail}")

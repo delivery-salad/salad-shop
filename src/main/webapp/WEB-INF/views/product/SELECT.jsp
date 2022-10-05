@@ -369,7 +369,7 @@
 </div>  <!-- container 종료 -->
 
 <!--  주문 form  -->
-<form action="<c:url value='/order/orderCheck/${login.userEmail}' />" method="get" class="order-form">
+<form action="<c:url value='/order/orderCheck/${login.userEmail}' />" method="post" class="order-form">
 	<input type="hidden" class="orderForm-productNum" name="productNum" value="${product.productNum}">
 	<input type="hidden" class="orderForm-productCount" id="pCount" name="orderCount" value="">
 
