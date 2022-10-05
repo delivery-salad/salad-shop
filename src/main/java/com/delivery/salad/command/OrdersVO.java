@@ -1,6 +1,6 @@
 package com.delivery.salad.command;
 
-import com.google.protobuf.Timestamp;
+import java.sql.Timestamp;
 
 /*
 글번호 

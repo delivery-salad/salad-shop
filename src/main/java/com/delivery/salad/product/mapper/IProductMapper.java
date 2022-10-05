@@ -24,7 +24,5 @@ public interface IProductMapper {
 	
 	//상품 삭제
 	int productDelte(int productNum);
-	
-	
-	
+
 }

@@ -26,5 +26,8 @@ public interface IOrdersMapper {
 		
 		//주문 삭제 	
 		void delete(int orderNum);
+		
+		// 주문 정보 가져오기 
+		List<OrdersVO> getAllOrders(String userEmail);
 
 }

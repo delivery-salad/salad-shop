@@ -157,28 +157,18 @@
                     </thead>
 
                     <tbody style="border-top : 3px solid #e9ecef">
-                    <tr>
-                        <td>1</td>
-                        <td>고기 샐러드</td>
-                        <td>1</td>
-                        <td>30,000</td>
-                        <!-- Javascript를 사용해서 날짜 입력받거나  -->
-                        <td>배송 준비중</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>연어 샐러드</td>
-                        <td>3</td>
-                        <td>15,000</td>
-                        <td>배송 중</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>트러플 샐러드</td>
-                        <td>2</td>
-                        <td>80,000</td>
-                        <td>배송 완료</td>
-                    </tr>
+                    <!--  -->
+                    <c:forEach var="order" items="${orderList }">
+                    	<tr>
+	                        <td>${order.orderNum }</td>
+	                        <td>${order.productName }</td>
+	                        <td>${order.orderCount }</td>
+	                        <td>${order.totalPrice }</td>
+	                        <!-- Javascript를 사용해서 날짜 입력받거나  -->
+	                        <td>배송 준비중</td>
+                    	</tr>
+                    </c:forEach>
+                    
                     </tbody>
                 </table>
             </div>

@@ -77,6 +77,18 @@
 									<li><a href="#">English</a></li>
 								</ul>
 							</div>
+							
+							<c:choose>
+							
+							<c:when test="${not empty sessionScope.login }">
+							
+							<div class="header__top__right__auth">
+								<a href="<c:url value='/user/Logout'/>"><i class="fa fa-user"></i> logout</a>
+								
+							</div>
+							</c:when>
+							
+							<c:otherwise>
 							<div class="header__top__right__auth">
 								<a href="<c:url value='/user/moveLogin'/>"><i class="fa fa-user"></i> Login</a>
 								
@@ -85,6 +97,9 @@
 								<a href="<c:url value='/user/regist'/>"><i class="fa fa-user"></i> Regist</a>
 								
 							</div>
+							</c:otherwise>
+							
+							</c:choose>
 
 							<div class="header__cart">
 								<ul>

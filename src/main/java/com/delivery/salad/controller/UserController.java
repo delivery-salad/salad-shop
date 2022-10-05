@@ -2,6 +2,7 @@ package com.delivery.salad.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.delivery.salad.command.KakaoUser;
 import com.delivery.salad.command.NaverUser;
+import com.delivery.salad.command.OrdersVO;
 import com.delivery.salad.command.UserVO;
-
+import com.delivery.salad.orders.service.IOrdersService;
 import com.delivery.salad.user.NaverLogin;
 import com.delivery.salad.user.service.IUserService;
 import com.delivery.salad.user.service.MemberService;
@@ -262,9 +264,20 @@ public class UserController {
 
     	}
 	
+	@Autowired
+	private IOrdersService ordersService;
+	
 	@GetMapping("/user/moveMypage")
-	public String moveMypage() {
+	public String moveMypage(HttpSession session, Model model) {
 		System.out.println("user/moveMypage : GET");
+		UserVO loginUser = (UserVO) session.getAttribute("login");
+		
+		// 2개 이상 되어야 MYPAGE로 가는데 에러가 안뜸 
+		List<OrdersVO> orderList = ordersService.getAllOrders(loginUser.getUserEmail());
+		System.out.println("주문정보확인 : " + orderList.toString());
+		
+		model.addAttribute("orderList", orderList);
+		
 		
 		return "user/MYPAGE";
 	}
@@ -405,6 +418,7 @@ public class UserController {
 
 	}
 	
+	// 유저 삭제 
 	@GetMapping("/user/moveMyDel")
 	public String moveMypageDelete() {
 		System.out.println("user/moveMyDel : GET");
@@ -417,6 +431,18 @@ public class UserController {
 		System.out.println("user/MyDel : POST");
 		
 		service.delete(user);
+		return "redirect:/user/moveLogin";
+	}
+	
+	// 유저 로그아웃 
+	@GetMapping("/user/Logout")
+	public String UserLogout(HttpSession session, RedirectAttributes ra)  throws IOException{
+		
+		System.out.println("/user/Logout");
+		
+		session.removeAttribute("login");
+		session.invalidate();
+		
 		return "redirect:/user/moveLogin";
 	}
 	

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.delivery.salad.product.mapper.IProductMapper">
 
-<resultMap type="com.delivery.salad.command.ProductVO" id="product">
+ <resultMap type="com.delivery.salad.command.ProductVO" id="product">
 	<result property="productNum" column="PRODUCTNUM" />
 	<result property="productPrice" column="PRODUCTPRICE" />
 	<result property="productCount" column="PRODUCTCOUNT" />
@@ -20,7 +20,7 @@
 	
 
 
-</resultMap>
+</resultMap> 
 
 
 <!--  상품 전체 개수 조회  -->

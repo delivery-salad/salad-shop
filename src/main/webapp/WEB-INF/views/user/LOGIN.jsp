@@ -140,9 +140,9 @@
                             <img src="${pageContext.request.contextPath }/resources/img/kakao_icon.png" alt="Image" class="img-sns">
                         </a> 
 
-                        <a href="#" class="google">
+                        <%-- <a href="#" class="google">
                             <img src="${pageContext.request.contextPath }/resources/img/btn-google.svg" alt="Image" class="img-sns">
-                        </a> 
+                        </a>  --%>
 
                       </div>
                     </form>

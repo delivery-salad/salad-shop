@@ -2,7 +2,6 @@ package com.delivery.salad.command;
 
 import java.util.Date;
 
-import org.springframework.web.multipart.MultipartFile;
 
 /*
 create table PRODUCT(

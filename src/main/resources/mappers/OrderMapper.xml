@@ -6,17 +6,28 @@
 <mapper namespace="com.delivery.salad.orders.mapper.IOrdersMapper">
 	<!-- namespace는 어떤 interface를 참조하는지 지정  -->
 	
-
-	
-	  <resultMap type="com.delivery.salad.command.UserVO" id="UserMap">
+	  
+	  <resultMap type="com.delivery.salad.command.OrdersVO" id="OrdersMap">
 	  	
-	  	<result property="userName" column="USERNAME"/>
-	  	<result property="userPw" column="USERPW"/>
-	  	<result property="userPhone" column="USERPHONE"/>
+	  	<id property="orderNum" column="ORDERNUM"/>
+	  	
 	  	<result property="userEmail" column="USEREMAIL"/>
-	  	<result property="userBasicAddr" column="USERBASICADDR"/>
-	  	<result property="userDetailAddr" column="USERDETAILADDR"/>
-
+	  	<result property="orderName" column="ORDERNAME"/>
+	  	<result property="orderPhone" column="ORDERPHONE"/>
+	  	<result property="orderEmail" column="ORDEREMAIL"/>
+	  	<result property="orderAddress1" column="ORDERADDRESS1"/>
+	  	<result property="orderAddress2" column="ORDERADDRESS2"/>
+	  	<result property="orderAddress3" column="ORDERADDRESS3"/>
+	  	<result property="orderState" column="ORDERSTATE"/>
+	  	<result property="deliveryCost" column="DELIVERYCOST"/>
+	  	<result property="orderDate" column="ORDERDATE"/>
+	  	<result property="orderCount" column="ORDERCOUNT"/>
+	  	<result property="productNum" column="PRODUCTNUM"/>
+		<result property="productCount" column="PRODUCTCOUNT"/>
+	  	<result property="productName" column="PRODUCTNAME"/>
+	  	<result property="productPrice" column="PRODUCTPRICE"/>
+	  	<result property="totalPrice" column="TOTALPRICE"/>
+	  	<result property="deliveryComment" column="DELIVERYCOMMENT"/>
 	  </resultMap>
 
 
@@ -29,6 +40,11 @@
 		INSERT INTO ORDERPROD ( PRODUCTNUM, PRODUCTCOUNT, PRODUCTNAME, PRODUCTPRICE, TOTALPRICE) 
 		VALUES( #{productNum}, #{productCount}, #{productName}, #{productPrice}, #{totalPrice})
 	</insert> -->
+	
+	<select id="getAllOrders" resultType="com.delivery.salad.command.OrdersVO">
+		SELECT * FROM ORDERS 
+		WHERE USEREMAIL = #{userEamil}
+	</select>
 	
 
 </mapper>
