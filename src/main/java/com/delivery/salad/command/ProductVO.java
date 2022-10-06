@@ -14,14 +14,32 @@ create table PRODUCT(
     PRODUCTUPDATEDATE datetime default current_timestamp,
     PRODUCTIMGURL varchar(1000),
     PRODUCTIMGNAME varchar(1000),
+    PRODUCTIMGORIGINALFILENAME varchar(1000),
     PRODUCTCONTENTIMGURL varchar(1000),
-    PRODUCTCONTENTIMGNAME varchar(1000)
+    PRODUCTCONTENTIMGNAME varchar(1000),
+    PRODUCTCONTENTORIGINALFILENAME varchar(1000)
+    
 );
-
 select * from PRODUCT;
 drop table PRODUCT; 
  */
 public class ProductVO {
+
+	public String getProductContentOriginalFileName() {
+		return productContentOriginalFileName;
+	}
+
+	public void setProductContentOriginalFileName(String productContentOriginalFileName) {
+		this.productContentOriginalFileName = productContentOriginalFileName;
+	}
+
+	public String getProductImgOriginalFileName() {
+		return productImgOriginalFileName;
+	}
+
+	public void setProductImgOriginalFileName(String productImgOriginalFileName) {
+		this.productImgOriginalFileName = productImgOriginalFileName;
+	}
 
 	public int productNum; // 상품 기본키(auto_increment)
 
@@ -32,12 +50,14 @@ public class ProductVO {
 	public String productContent; // 상품 내용
 	public String productContentImgUrl;
 	public String productContentImgName;
+	public String productContentOriginalFileName;
 	
 	
 	
 	//List화면에서 보여지는 이미지를 위한 변수 
 	public String productImgUrl;
 	public String productImgName;
+	public String productImgOriginalFileName;
 	
 	
 	public int productCount; // 상품 개수
