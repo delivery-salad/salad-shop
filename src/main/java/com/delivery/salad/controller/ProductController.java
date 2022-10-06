@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.delivery.salad.command.ProductVO;
+import com.delivery.salad.command.QnAVO;
 import com.delivery.salad.product.service.IProductService;
 import com.delivery.salad.util.PageCreate;
 import com.delivery.salad.util.PageVO;
@@ -175,10 +177,12 @@ public class ProductController {
 			vo.setProductContent("간단한 설명");
 			vo.setProductImgUrl(uploadFolder+"\\");
 			vo.setProductImgName(uuids[0]+fileExtension);
-
+			vo.setProductImgOriginalFileName(fileRealName);
+			
 			vo.setProductContentImgUrl(uploadFolder+"\\");
 			vo.setProductContentImgName(uuids2[0]+fileExtension2);
-			
+			vo.setProductContentOriginalFileName(fileRealName2);
+			 
 			if(productService.productRegist(vo) == 1) {
 			  System.out.println("상품 등록이 정상적으로 완료되었습니다.");
 			  System.out.println(vo.getProductNum()); }
@@ -270,6 +274,32 @@ public class ProductController {
 		return "redirect:/product/productList";
 	}
 
+	//QnA 등록창 
+	@GetMapping("/product/productQnA")
+	public String productQnA() {
+		return "product/PROUDCT_INQUIRY_REGIST";
+	}
 	
+	//QNA 등록
+	@PostMapping("/product/productQnA")
+	@ResponseBody
+	public String productQnA(@RequestBody HashMap<String, Object> map) {
+
+		System.out.println(map);
+		QnAVO vo=new QnAVO();
+		vo.setQnaWriter((String)map.get("qnaWriter"));
+		vo.setQnaPw((String)map.get("qnaPw"));
+		vo.setQnaTitle((String)map.get("qnaTitle"));
+		vo.setQnaContent((String)map.get("qnaContent"));
+		vo.setProductNum((Integer)map.get("productNum"));
+		productService.productQnARegist(vo);
+		return "success";
+	}
+	
+	@GetMapping("/product/productQnA/SELECT")
+	public String getQnA() {
+		return "product/PRODUCT_INQUIRY_SELECT";
+				
+	}
 	
 }
