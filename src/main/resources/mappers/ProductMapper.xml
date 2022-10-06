@@ -15,12 +15,29 @@
 	<result property="productUpdateDate" column="PRODUCTUPDATEDATE" />
 	<result property="productImgUrl" column="PRODUCTIMGURL" />
 	<result property="productImgName" column="PRODUCTIMGNAME" />
+	<result property="productImgOriginalFileName" column="PRODUCTIMGORIGINALFILENAME" />
 	<result property="productContentImgUrl" column="PRODUCTCONTENTIMGURL" />
 	<result property="productContentImgName" column="PRODUCTCONTENTIMGNAME" />
+	<result property="productContentImgName" column="PRODUCTCONTENTIMGNAME" />
+	<result property="productContentOriginalFileName" column="PRODUCTCONTENTORIGINALFILENAME" />
 	
 
 
 </resultMap> 
+
+<!-- QnA -->
+<resultMap type="com.delivery.salad.command.QnAVO" id="qna">
+	<result property="qnaNum" column="QNANUM"/>
+	<result property="qnaWriter" column="QNAWRITER"/>
+	<result property="qnaPw" column="QNAPW"/>
+	<result property="qnaTitle" column="QNATITLE"/>
+	<result property="qnaContent" column="QNACONTENT"/>
+	<result property="qnaRegistDate" column="QNAREGISTDATE" />
+	<result property="qnaUpdateDate" column="QNAUPDATEDATE" />
+	<result property="productNum" column="PRODUCTNUM" />
+
+</resultMap>
+
 
 
 <!--  상품 전체 개수 조회  -->
@@ -45,8 +62,8 @@
 <!-- 상품 등록  -->
 <insert id="productRegist"   useGeneratedKeys="true" keyColumn="PRODUCTNUM" keyProperty="productNum">
 
-	INSERT INTO PRODUCT(PRODUCTPRICE,PRODUCTCOUNT,PRODUCTNAME,PRODUCTCONTENT,PRODUCTIMGURL,PRODUCTIMGNAME,PRODUCTCONTENTIMGURL,PRODUCTCONTENTIMGNAME)
-	VALUES(#{productPrice},#{productCount},#{productName},#{productContent},#{productImgUrl},#{productImgName},#{productContentImgUrl},#{productContentImgName})
+	INSERT INTO PRODUCT(PRODUCTPRICE,PRODUCTCOUNT,PRODUCTNAME,PRODUCTCONTENT,PRODUCTIMGURL,PRODUCTIMGNAME,PRODUCTCONTENTIMGURL,PRODUCTCONTENTIMGNAME,PRODUCTIMGORIGINALFILENAME,PRODUCTCONTENTORIGINALFILENAME)
+	VALUES(#{productPrice},#{productCount},#{productName},#{productContent},#{productImgUrl},#{productImgName},#{productContentImgUrl},#{productContentImgName},#{productImgOriginalFileName},#{productContentOriginalFileName})
 </insert>
 
 <!--  상품 수정  -->
@@ -54,7 +71,8 @@
 	UPDATE PRODUCT SET 
 	PRODUCTPRICE=#{productPrice},PRODUCTCOUNT=#{productCount},
 	PRODUCTNAME=#{productName},PRODUCTCONTENT=#{productContent},
-	PRODUCTUPDATEDATE=now()
+	PRODUCTUPDATEDATE=now(),productImgOriginalFileName=#{productImgOriginalFileName},
+	productContentOriginalFileName=#{productContentOriginalFileName}
 	WHERE PRODUCTNUM=#{productNum} 
 
 </update>
@@ -64,5 +82,49 @@
 <delete id="productDelte">
 	DELETE FROM PRODUCT
 	WHERE PRODUCTNUM=#{productNum}
+</delete>
+
+
+
+
+
+<!--  QnA 전체 개수 조회  -->
+<select id="productQnATotalCount" resultType="int">
+	SELECT COUNT(*) FROM PRODUCTQNA
+	
+</select>
+
+<!--  QnA 전체 조회 -->
+<select id="productQnAList" resultMap="qna">
+	SELECT * FROM PRODUCTQNA
+	ORDER BY qnaNum DESC
+	limit #{pageStart},#{countPerPage}
+	
+</select>
+
+<!--  QnA 상세 조회  -->
+<select id="productQnASelect" resultMap="qna">
+	SELECT * FROM PRODUCTQNA
+	WHERE QNANUM=#{qnaNum}
+</select>
+
+<!--  QnA 등록 -->
+<insert id="productQnARegist"  >
+	INSERT INTO PRODUCTQNA(QNAWRITER,QNAPW,QNATITLE,QNACONTENT,PRODUCTNUM)
+	VALUES (#{qnaWriter},#{qnaPw},#{qnaTitle},#{qnaContent},#{productNum})
+</insert>
+
+<!--  QnA 수정  -->
+<update id="productQnAModify" >
+	UPDATE PRODUCTQNA SET 
+	QNATITLE=#{qnaTitle},QNACONTENT=#{qnaContent},QNAUPDATEDATE=now()
+	WHERE QNANUM=#{qnaNum} 
+
+</update>
+
+<!-- QnA 삭제  -->
+<delete id="productQnADelte">
+	DELETE FROM PRODUCTQNA
+	WHERE QNANUM=#{qnaNum}
 </delete>
 </mapper>
