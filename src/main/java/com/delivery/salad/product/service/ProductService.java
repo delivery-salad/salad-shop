@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.delivery.salad.command.ProductVO;
+import com.delivery.salad.command.QnAVO;
 import com.delivery.salad.product.mapper.IProductMapper;
 import com.delivery.salad.util.PageVO;
 
@@ -50,6 +51,36 @@ public class ProductService  implements IProductService{
 	@Override
 	public int productDelte(int productNum) {
 		return productMapper.productDelte(productNum);
+	}
+
+	@Override
+	public int productQnATotalCount() {
+		return productMapper.productQnATotalCount();
+	}
+
+	@Override
+	public List<QnAVO> productQnAList(PageVO vo) {
+		return productMapper.productQnAList(vo);
+	}
+
+	@Override
+	public int productQnARegist(QnAVO vo) {
+		return productMapper.productQnARegist(vo);
+	}
+
+	@Override
+	public int productQnAModify(QnAVO vo) {
+		return productMapper.productQnAModify(vo);
+	}
+
+	@Override
+	public int productQnADelte(int productQnANum) {
+		return productMapper.productQnADelte(productQnANum);
+	}
+
+	@Override
+	public QnAVO productQnASelect(int productQnANum) {
+		return productMapper.productQnASelect(productQnANum);
 	}
 
 

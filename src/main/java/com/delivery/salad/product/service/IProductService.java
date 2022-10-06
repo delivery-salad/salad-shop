@@ -3,6 +3,7 @@ package com.delivery.salad.product.service;
 import java.util.List;
 
 import com.delivery.salad.command.ProductVO;
+import com.delivery.salad.command.QnAVO;
 import com.delivery.salad.util.PageVO;
 
 public interface IProductService {
@@ -24,4 +25,17 @@ public interface IProductService {
 	
 	//상품 삭제
 	int productDelte(int productNum);
+	
+	int productQnATotalCount();
+
+	List<QnAVO> productQnAList(PageVO vo);
+
+	QnAVO productQnASelect(int productQnANum);
+
+	int productQnARegist(QnAVO vo);
+
+	int productQnAModify(QnAVO vo);
+
+	int productQnADelte(int productQnANum);
+
 }
